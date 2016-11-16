@@ -16,7 +16,7 @@ local widget = require "widget"
 
 
 -- forward declarations and other locals
-local pBtn
+-- local pBtn
 
 -- 'onRelease' event listener for playBtn
 local function onDogBtnRelease()
@@ -27,7 +27,7 @@ local function onDogBtnRelease()
 	return true	-- indicates successful touch
 end
 
-local function oncCatBtnRelease()
+local function onCatBtnRelease()
 	
 	-- go to level1.lua scene
 	composer.gotoScene( "catornot", "fade", 500 )
