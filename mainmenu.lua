@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- menu.lua
+-- mainmenu.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -12,70 +12,71 @@ local widget = require "widget"
 local functions = require ("utils.functions")
 --------------------------------------------
 
--- forward declarations and other locals
-local playBtn
-
--- 'onRelease' event listener for playBtn
-local function onPlayBtnRelease()
-	
-	-- go to level1.lua scene
-	composer.gotoScene( "menu2", "fade", 500)
+local function onYardBtnRelease()
+	composer.gotoScene( "yard", "fade", 500)
 	return true	-- indicates successful touch
 end
 
-local function onQuitBtnRelease()
-	
-	-- go to level1.lua scene
-	os.exit()
-	
-	return true	-- indicates successful touch
+local function onShopBtnRelease()
+  composer.gotoScene( "shop", "fade", 500)
+  return true -- indicates successful touch
 end
 
-local function onMenuBtnRelease()
-  
-  -- go to level1.lua scene
-  composer.gotoScene( "mainmenu", "fade", 500)
+local function onGamesBtnRelease()
+  composer.gotoScene( "games", "fade", 500)
+  return true -- indicates successful touch
+end
+
+local function onCameraBtnRelease()
+  composer.gotoScene( "camera", "fade", 500)
+  return true -- indicates successful touch
+end
+
+local function onTubBtnRelease()
+  composer.gotoScene( "tub", "fade", 500)
   return true -- indicates successful touch
 end
 
 function scene:create( event )
 	local sceneGroup = self.view
 
-	-- Called when the scene's view does not exist.
-	-- 
-	-- INSERT code here to initialize the scene
-	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
-
-	-- display a background image
 	local background = display.newImageRect( "background.png", display.actualContentWidth, display.actualContentHeight )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x = 0 + display.screenOriginX 
 	background.y = 0 + display.screenOriginY
 	
-	-- create/position logo/title image on upper-half of the screen
 	local titleLogo = display.newImageRect( "logo.png", 264, 42 )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 100
-	
-	playBtn = functions.createButton("Play Now", onPlayBtnRelease)
-	playBtn.x = display.contentCenterX
-	playBtn.y = display.contentHeight - 300
-	
-	quitBtn = functions.createButton("Quit", onQuitBtnRelease)
-	quitBtn.x = display.contentCenterX
-	quitBtn.y = display.contentHeight - 255
+		
+	yardBtn = functions.createButton("Yard", onYardBtnRelease)
+	yardBtn.x = display.contentCenterX
+	yardBtn.y = display.contentHeight - 300
 
-  menuBtn = functions.createButton("Menu", onMenuBtnRelease)
-  menuBtn.x = display.contentCenterX
-  menuBtn.y = display.contentHeight - 100
+  shopBtn = functions.createButton("Shop", onShopBtnRelease)
+  shopBtn.x = display.contentCenterX
+  shopBtn.y = display.contentHeight - 250
   
-	-- all display objects must be inserted into group
+  gamesBtn = functions.createButton("Games", onGamesBtnRelease)
+  gamesBtn.x = display.contentCenterX
+  gamesBtn.y = display.contentHeight - 200
+  
+  cameraBtn = functions.createButton("Camera", onCameraBtnRelease)
+  cameraBtn.x = display.contentCenterX
+  cameraBtn.y = display.contentHeight - 150
+  
+  tubBtn = functions.createButton("Tub", onTubBtnRelease)
+  tubBtn.x = display.contentCenterX
+  tubBtn.y = display.contentHeight - 100
+  
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
-	sceneGroup:insert( playBtn )
-	sceneGroup:insert( quitBtn)
-	sceneGroup:insert( menuBtn)
+	sceneGroup:insert( yardBtn )
+	sceneGroup:insert( shopBtn )
+	sceneGroup:insert( gamesBtn )
+	sceneGroup:insert( cameraBtn )
+	sceneGroup:insert( tubBtn )
 end
 
 function scene:show( event )

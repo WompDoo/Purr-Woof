@@ -9,6 +9,7 @@ local scene = composer.newScene()
 
 -- include Corona's "widget" library
 local widget = require "widget"
+local functions = require ("utils.functions")
 
 --------------------------------------------
 
@@ -58,15 +59,7 @@ function scene:create( event )
 	titleLogo.y = 100
 	
 	-- create a widget button (which will loads level1.lua on release)
-	dogBtn = widget.newButton{
-		label="dog person",
-		labelColor = { default={black}, over={128} },
-		default="button.png",
-		over="button-over.png",
-		width=154, height=40,
-		onRelease = onDogBtnRelease	-- event listener function
-	}
-
+	dogBtn = functions.createButton("dog person", onDogBtnRelease)
 	dogBtn.x = display.contentCenterX
 	dogBtn.y = display.contentHeight - 270
 
@@ -77,14 +70,7 @@ function scene:create( event )
 	text2:setFillColor( 0, 0, 0 )
 	
 
-	catBtn = widget.newButton{
-		label="cat person",
-		labelColor = { default={black}, over={128} },
-		default="button.png",
-		over="button-over.png",
-		width=154, height=40,
-		onRelease = onCatBtnRelease	-- event listener function
-	}
+	catBtn = functions.createButton("cat person", onCatBtnRelease)
 	catBtn.x = display.contentCenterX
 	catBtn.y = display.contentHeight - 180
 	-- all display objects must be inserted into group
