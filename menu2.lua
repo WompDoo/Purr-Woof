@@ -19,18 +19,18 @@ local widget = require "widget"
 local pBtn
 
 -- 'onRelease' event listener for playBtn
-local function onPlayBtnRelease()
+local function onDogBtnRelease()
 	
 	-- go to level1.lua scene
-	composer.gotoScene( "menu", "fade", 500 )
+	composer.gotoScene( "dogster", "fade", 500 )
 	
 	return true	-- indicates successful touch
 end
 
-local function onQuitBtnRelease()
+local function oncCatBtnRelease()
 	
 	-- go to level1.lua scene
-	os.exit()
+	composer.gotoScene( "catornot", "fade", 500 )
 	
 	return true	-- indicates successful touch
 end
@@ -64,7 +64,7 @@ function scene:create( event )
 		default="button.png",
 		over="button-over.png",
 		width=154, height=40,
-		onRelease = onPlayBtnRelease	-- event listener function
+		onRelease = onDogBtnRelease	-- event listener function
 	}
 
 	dogBtn.x = display.contentCenterX
@@ -83,7 +83,7 @@ function scene:create( event )
 		default="button.png",
 		over="button-over.png",
 		width=154, height=40,
-		onRelease = onQuitBtnRelease	-- event listener function
+		onRelease = onCatBtnRelease	-- event listener function
 	}
 	catBtn.x = display.contentCenterX
 	catBtn.y = display.contentHeight - 180
