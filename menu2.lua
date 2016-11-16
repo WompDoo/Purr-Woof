@@ -70,13 +70,13 @@ function scene:create( event )
 	dogBtn.x = display.contentCenterX
 	dogBtn.y = display.contentHeight - 270
 
-	local text1 = display.newText( "Are you a", display.contentCenterX, 165,  native.systemFont, 26)	
+	text1 = display.newText( "Are you a", display.contentCenterX, 165,  native.systemFont, 26)	
 	text1:setFillColor( 0, 0, 0 )
 	
-	local text2 = display.newText( "or a", display.contentCenterX, 255,  native.systemFont, 26 )
+	text2 = display.newText( "or a", display.contentCenterX, 255,  native.systemFont, 26 )
 	text2:setFillColor( 0, 0, 0 )
 	
-		
+
 	catBtn = widget.newButton{
 		label="cat person",
 		labelColor = { default={black}, over={128} },
@@ -91,8 +91,9 @@ function scene:create( event )
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
 	sceneGroup:insert( text1 )
-	--sceneGroup:insert( dogBtn )
-	--sceneGroup:insert( catBtn)
+	sceneGroup:insert( text2 )
+	sceneGroup:insert( dogBtn )
+	sceneGroup:insert( catBtn)
 end
 
 function scene:show( event )

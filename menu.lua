@@ -19,8 +19,7 @@ local playBtn
 local function onPlayBtnRelease()
 	
 	-- go to level1.lua scene
-	composer.gotoScene( "menu2", "CrossFade")
-	--scene:destroy("menu")
+	composer.gotoScene( "menu2", "fade", 500)
 	return true	-- indicates successful touch
 end
 
