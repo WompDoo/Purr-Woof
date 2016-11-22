@@ -40,14 +40,14 @@ function scene:create( event )
 	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
 
 	-- display a background image
-	local background = display.newImageRect( "background.png", display.actualContentWidth, display.actualContentHeight )
+	local background = display.newImageRect( "pictures/background.png", display.actualContentWidth, display.actualContentHeight )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x = 0 + display.screenOriginX 
 	background.y = 0 + display.screenOriginY
 	
 	-- create/position logo/title image on upper-half of the screen
-	local titleLogo = display.newImageRect( "logo.png", 264, 42 )
+	local titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 100
 	
@@ -58,8 +58,8 @@ function scene:create( event )
 	playBtn = widget.newButton{
 		label="Play Now",
 		labelColor = { default={black}, over={128} },
-		default="button.png",
-		over="button-over.png",
+		default="pictures/button.png",
+		over="pictures/button-over.png",
 		width=154, height=40,
 		onRelease = onPlayBtnRelease	-- event listener function
 	}
@@ -74,8 +74,8 @@ function scene:create( event )
 	quitBtn = widget.newButton{
 		label="Quit",
 		labelColor = { default={black}, over={128} },
-		default="button.png",
-		over="button-over.png",
+		default="pictures/button.png",
+		over="pictures/button-over.png",
 		width=154, height=40,
 		onRelease = onQuitBtnRelease	-- event listener function
 	}

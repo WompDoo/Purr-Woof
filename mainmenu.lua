@@ -40,13 +40,13 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect( "background.png", display.actualContentWidth, display.actualContentHeight )
+	local background = display.newImageRect( "pictures/background.png", display.actualContentWidth, display.actualContentHeight )
 	background.anchorX = 0
 	background.anchorY = 0
 	background.x = 0 + display.screenOriginX 
 	background.y = 0 + display.screenOriginY
 	
-	local titleLogo = display.newImageRect( "logo.png", 264, 42 )
+	local titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 100
 		
