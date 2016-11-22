@@ -16,17 +16,39 @@ local widget = require "widget"
 local playBtn
 
 -- 'onRelease' event listener for playBtn
-local function onPlayBtnRelease()
+local function onHotBtnRelease()
 	
 	-- go to level1.lua scene
-	composer.gotoScene( "menu2", "fade", 500)
+	--composer.gotoScene( "menu2", "fade", 500)
+	--return true	-- indicates successful touch
+end
+
+local function onNotBtnRelease1()
+	
+	transition.to( dog1, { time=1000, alpha=0 } )
+	transition.to( dog2, { time=1000, alpha=1 } )
+	notBtn1.isVisible = false
+	notBtn2.isVisible = true
+ 	
 	return true	-- indicates successful touch
 end
 
-local function onQuitBtnRelease()
+local function onNotBtnRelease2()
 	
-	-- go to level1.lua scene
-	os.exit()
+	transition.to( dog2, { time=1000, alpha=0 } )
+	transition.to( dog3, { time=1000, alpha=1 } )
+	notBtn2.isVisible = false
+	notBtn3.isVisible = true
+
+	return true	-- indicates successful touch
+end
+
+local function onNotBtnRelease3()
+	
+	transition.to( dog3, { time=1000, alpha=0 } )
+	transition.to( dog1, { time=1000, alpha=1} )
+	notBtn3.isVisible = false
+	notBtn1.isVisible =true
 	
 	return true	-- indicates successful touch
 end
@@ -49,22 +71,60 @@ function scene:create( event )
 	-- create/position logo/title image on upper-half of the screen
 	local titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
 	titleLogo.x = display.contentCenterX
-	titleLogo.y = 100
+	titleLogo.y = 25
+	
+	dog1 = display.newImageRect( "pictures/dog2.png", 280, 290 )
+	dog1.x = display.contentCenterX
+	dog1.y = 220
+
+	dog2 = display.newImageRect( "pictures/cat2.png", 280, 290 )
+	dog2.x = display.contentCenterX
+	dog2.y = 220
+	dog2.alpha = 0
+
+	dog3 = display.newImageRect( "pictures/cat3.png", 280, 290 )
+	dog3.x = display.contentCenterX
+	dog3.y = 220
+	dog3.alpha = 0
 	
 	
+	notBtn2 = widget.newButton{
+		--label="Play Now",
+		--labelColor = { default={black}, over={128} },
+		defaultFile="pictures/Xfullred.png",
+		--over="button-over.png",
+		width=110, height=90,
+		onRelease = onNotBtnRelease2	-- event listener function
+	}
+	notBtn2.x = 90
+	notBtn2.y = 450
 	
+	notBtn3 = widget.newButton{
+		--label="Play Now",
+		--labelColor = { default={black}, over={128} },
+		defaultFile="pictures/Xfullred.png",
+		--over="button-over.png",
+		width=110, height=90,
+		onRelease = onNotBtnRelease3	-- event listener function
+	}
+	notBtn3.x = 90
+	notBtn3.y = 450
+
+
 
 	-- create a widget button (which will loads level1.lua on release)
-	playBtn = widget.newButton{
-		label="Play Now",
-		labelColor = { default={black}, over={128} },
-		default="pictures/button.png",
-		over="pictures/button-over.png",
-		width=154, height=40,
-		onRelease = onPlayBtnRelease	-- event listener function
+	notBtn1 = widget.newButton{
+		--label="Play Now",
+		--labelColor = { default={black}, over={128} },
+		defaultFile="pictures/Xfullred.png",
+		--over="button-over.png",
+		width=110, height=90,
+		onRelease = onNotBtnRelease1	-- event listener function
 	}
-	playBtn.x = display.contentCenterX
-	playBtn.y = display.contentHeight - 300
+	notBtn1.x = 90
+	notBtn1.y = 450
+
+	
 
 	--myRectangle = display.newRect(158,175,124,30)
 	--myRectangle.strokeWidth = 3
@@ -72,20 +132,23 @@ function scene:create( event )
 	--myRectangle:setStrokeColor( 1, 0, 0 )
 	
 	quitBtn = widget.newButton{
-		label="Quit",
-		labelColor = { default={black}, over={128} },
-		default="pictures/button.png",
-		over="pictures/button-over.png",
-		width=154, height=40,
-		onRelease = onQuitBtnRelease	-- event listener function
+		--label="Quit",
+		--labelColor = { default={black}, over={128} },
+		defaultFile="pictures/syda.png",
+		--over="button-over.png",
+		width=123, height=117,
+		onRelease = onHotBtnRelease	-- event listener function
 	}
-	quitBtn.x = display.contentCenterX
-	quitBtn.y = display.contentHeight - 255
+	quitBtn.x = 235
+	quitBtn.y = 450
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
-	sceneGroup:insert( playBtn )
+	sceneGroup:insert( notBtn3 )
+	sceneGroup:insert( notBtn2 )
+	sceneGroup:insert( notBtn1)
 	sceneGroup:insert( quitBtn)
+	sceneGroup:insert(dog1)
 end
 
 function scene:show( event )
