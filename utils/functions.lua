@@ -9,6 +9,8 @@ local function createButton(labeltext, functionname)
     default="button.png",
     over="button-over.png",
     width=154, height=40,
+    font = "dogfont.ttf",
+    fontSize = 28,
     onRelease = functionname  -- event listener function
   }
 end
