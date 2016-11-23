@@ -18,6 +18,8 @@ local function createButtonShop(labeltext, functionname)
     label=labeltext,
     labelColor = { default={black}, over={128} },
     defaultFile="pictures/tab.png",
+    font = "dogfont.ttf",
+    fontSize = 28,
     width=120, height=60,
     onRelease = functionname  -- event listener function
   }
@@ -29,6 +31,9 @@ local function createButtonShopItem(labeltext, functionname)
     labelColor = { default={black}, over={128} },
     defaultFile="pictures/item.png",
     width=120, height=120,
+    font = "dogfont.ttf",
+    fontSize = 28,
+    labelYOffset = 33,
     onRelease = functionname  -- event listener function
   }
 end
@@ -54,6 +59,13 @@ local function loadLogo(y)
   titleLogo.x = display.contentCenterX
   titleLogo.y = y
   return titleLogo
+end
+
+local function displayAnimal(image)
+  animal = display.newImageRect( image, 280, 290 )
+  animal.x = display.contentCenterX
+  animal.y = 220
+  return animal
 end
 
 functionbag.createButton = createButton
