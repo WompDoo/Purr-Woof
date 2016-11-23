@@ -11,19 +11,34 @@ local scene = composer.newScene()
 local widget = require "widget"
 local functions = require ("utils.functions")
 local animals = require ("utils.animals")
+local dogs = animals["dogs"]
 --------------------------------------------
 
--- forward declarations and other locals
-local playBtn
+local function onInfoBtnRelease()
+  local infooptions =
+  {
+    isModal = true,
+    effect = "fade",
+    params = {
+        animal = dogs[nextdog]
+    }
+  }
+  composer.showOverlay("info", infooptions)
+  
+  infoBtn.isVisible = false
+  
+  return true -- indicates successful touch
+end 
 
--- 'onRelease' event listener for playBtn
 local function onHotBtnRelease()
-  message = "You chose " .. animals[nextdog]["name"] .. "!"
+  message = "You chose " .. dogs[nextdog]["name"] .. "!"
 	native.showAlert( "Chosen Dog", message )
 end
 
 local function onNotBtnRelease()
-  nextdog = next(animals,nextdog)
+  local sceneGroup = scene.view
+  
+  nextdog = next(dogs,nextdog)
   dog:removeSelf()
   dog = nil
   if not nextdog then
@@ -38,25 +53,29 @@ local function onNotBtnRelease()
     }
     dog = display.newText( ranouttext )
     dog:setFillColor( black )
+    sceneGroup:insert( dog )
     backBtn.isVisible = true
     catBtn.isVisible = true
     hotBtn:removeSelf()
     notBtn:removeSelf()
+    infoBtn:removeSelf()
   else 
-    dog = functions.displayAnimal( animals[nextdog]["image"] )
+    dog = functions.displayAnimal( dogs[nextdog]["image"] )
+    sceneGroup:insert( dog )
+    infoBtn:toFront()
   end
 	return true	-- indicates successful touch
 end
 
 local function onBackBtnRelease()
-  dog:removeSelf()
-  composer.gotoScene( "mainmenu", "fade", 500)
+  composer.gotoScene( "mainmenu" )
+  composer.removeScene( "dogster" )
   return true -- indicates successful touch
 end
 
 local function onCatBtnRelease()
-  dog:removeSelf()
-  composer.gotoScene( "catornot", "fade", 500)
+  composer.gotoScene( "catornot" )
+  composer.removeScene( "dogster" )
   return true -- indicates successful touch
 end
 
@@ -67,7 +86,7 @@ function scene:create( event )
 	local titleLogo = functions.loadLogo(25)
 	
 	nextdog = 1
-	dog = functions.displayAnimal( animals[nextdog]["image"] )
+	dog = functions.displayAnimal( dogs[nextdog]["image"] )
 	
 	notBtn = widget.newButton{
 		defaultFile="pictures/Xfullred.png",
@@ -95,6 +114,15 @@ function scene:create( event )
   catBtn.y = 450
   catBtn.isVisible = false
   
+  infoBtn = widget.newButton{
+    defaultFile="pictures/info.png",
+    width=40, height=40,
+    onRelease = onInfoBtnRelease
+  }
+  infoBtn.x = 265
+  infoBtn.y = 106
+  
+  
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
@@ -103,6 +131,7 @@ function scene:create( event )
 	sceneGroup:insert( backBtn )
 	sceneGroup:insert( catBtn )
 	sceneGroup:insert( dog )
+	sceneGroup:insert( infoBtn )
 end
 
 function scene:show( event )

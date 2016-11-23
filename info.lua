@@ -14,7 +14,7 @@ local functions = require ("utils.functions")
 
 local function oncloseBtnRelease()
 	
-	composer.showOverlay("catornot", "fade")
+	composer.hideOverlay("fade", 400)
 	infoBtn.isVisible = true
 	closeBtn.isVisible = false
 	
@@ -23,8 +23,30 @@ end
 
 function scene:create( event )
 	local sceneGroup = self.view
-	local info = display.newText("Name:Fatsy\nLikes: human food, sleeping, staying home\nHates: Everyone, cat food, petting, water\nIs slightly racist against dogs.\nPlans to conquer the world.\nThinks her owner is not smart. At all. ", 160, 150)
-	info:setFillColor(0, 0, 0)
+
+	local nameoptions = 
+    {
+        text = event.params.animal["name"],
+        x = display.contentCenterX,
+        y = 100,
+        width = display.contentWidth * 0.8,
+        font = native.systemFont,
+        fontSize = 24
+    }
+  local name = display.newText( nameoptions )
+  name:setFillColor(0, 0, 0)
+  
+	local descriptionoptions = 
+    {
+        text = event.params.animal["description"],
+        x = display.contentCenterX,
+        y = 150,
+        width = display.contentWidth * 0.8,
+        font = native.systemFont,
+        fontSize = 16
+    }
+	local description = display.newText( descriptionoptions )
+	description:setFillColor(0, 0, 0)
 
 		closeBtn = widget.newButton{
 		--label="X",
@@ -38,21 +60,12 @@ function scene:create( event )
 		closeBtn.x = display.contentCenterX
 		closeBtn.y = 292
 
-	-- Called when the scene's view does not exist.
-	-- 
-	-- INSERT code here to initialize the scene
-	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
-
-	-- display a background image
-	local background = display.newImageRect( "pictures/background.png", display.actualContentWidth, display.actualContentHeight )
-	background.anchorX = 0
-	background.anchorY = 0
-	background.x = 0 + display.screenOriginX 
-	background.y = 0 + display.screenOriginY
+  local background = functions.loadBackground()
 
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
-	sceneGroup:insert( info )
+	sceneGroup:insert( name )
+	sceneGroup:insert( description )
 	
 end
 
