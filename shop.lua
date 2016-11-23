@@ -46,32 +46,32 @@ function scene:create( event )
 	background.x = 0 + display.screenOriginX 
 	background.y = 0 + display.screenOriginY
 		
-	yardBtn = functions.createButton("Cat", onYardBtnRelease)
-	yardBtn.x = display.contentWidth - 270
+	yardBtn = functions.createButtonShop("Cat", onYardBtnRelease)
+	yardBtn.x = display.contentWidth - 290
 	yardBtn.y = display.contentHeight - 450
 
-  shopBtn = functions.createButton("Dog", onShopBtnRelease)
-  shopBtn.x = display.contentWidth - 270
+  shopBtn = functions.createButtonShop("Dog", onShopBtnRelease)
+  shopBtn.x = display.contentWidth - 290
   shopBtn.y = display.contentHeight - 400
   
-  gamesBtn = functions.createButton("Food", onGamesBtnRelease)
-  gamesBtn.x = display.contentWidth - 270
+  gamesBtn = functions.createButtonShop("Food", onGamesBtnRelease)
+  gamesBtn.x = display.contentWidth - 290
   gamesBtn.y = display.contentHeight - 350
   
-  cameraBtn = functions.createButton("Toys", onCameraBtnRelease)
-  cameraBtn.x = display.contentWidth - 270
+  cameraBtn = functions.createButtonShop("Toys", onCameraBtnRelease)
+  cameraBtn.x = display.contentWidth - 290
   cameraBtn.y = display.contentHeight - 300
-  
-  tubBtn = functions.createButton("Tub", onTubBtnRelease)
-  tubBtn.x = display.contentWidth - 270
-  tubBtn.y = display.contentHeight - 250
+
+  cameraBtn = functions.createButtonShopItem("Item 1", onCameraBtnRelease)
+  cameraBtn.x = display.contentWidth - 200
+  cameraBtn.y = display.contentHeight - 450
+
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( yardBtn )
 	sceneGroup:insert( shopBtn )
 	sceneGroup:insert( gamesBtn )
 	sceneGroup:insert( cameraBtn )
-	sceneGroup:insert( tubBtn )
 end
 
 function scene:show( event )
