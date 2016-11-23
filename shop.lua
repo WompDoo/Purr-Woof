@@ -39,7 +39,20 @@ end
 
 local function onItemBtnRelease()
   message = "Do You want to buy this?"
-  native.showAlert( "Chosen Cat", message )
+  local function onChosenComplete( event )
+    if ( event.action == "clicked" ) then
+        local i = event.index
+        if ( i == 1 ) then
+          -- just dismiss this
+        elseif ( i == 2 ) then
+          --add something to do with yes
+        end
+    end
+  end 
+
+  native.showAlert( "Purrchase confirmation", message, { "No", "Yes" }, onChosenComplete)
+
+
 end
 
 function scene:create( event )
