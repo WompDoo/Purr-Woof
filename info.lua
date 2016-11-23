@@ -14,7 +14,7 @@ local functions = require ("utils.functions")
 
 local function oncloseBtnRelease()
 	
-	composer.hideOverlay("fade", 400)
+	composer.hideOverlay("slideUp", 400)
 	infoBtn.isVisible = true
 	closeBtn.isVisible = false
 	
@@ -28,10 +28,10 @@ function scene:create( event )
     {
         text = event.params.animal["name"],
         x = display.contentCenterX,
-        y = 100,
-        width = display.contentWidth * 0.8,
-        font = native.systemFont,
-        fontSize = 24
+        y = 170,
+        width = display.contentWidth * 0.65,
+        font = "dogfont.ttf",
+        fontSize = 36
     }
   local name = display.newText( nameoptions )
   name:setFillColor(0, 0, 0)
@@ -40,10 +40,10 @@ function scene:create( event )
     {
         text = event.params.animal["description"],
         x = display.contentCenterX,
-        y = 150,
-        width = display.contentWidth * 0.8,
-        font = native.systemFont,
-        fontSize = 16
+        y = 210,
+        width = display.contentWidth * 0.65,
+        font = "dogfont.ttf",
+        fontSize = 24
     }
 	local description = display.newText( descriptionoptions )
 	description:setFillColor(0, 0, 0)
@@ -58,12 +58,14 @@ function scene:create( event )
 	}
 		
 		closeBtn.x = display.contentCenterX
-		closeBtn.y = 292
+		closeBtn.y = 275
 
-  local background = functions.loadBackground()
-
-	-- all display objects must be inserted into group
-	sceneGroup:insert( background )
+  infobackground = display.newImageRect( "pictures/infobckgr.png", 264, 240 )
+  infobackground.x = display.contentCenterX
+  infobackground.y = 200
+  
+	sceneGroup:insert ( infobackground )
+	sceneGroup:insert( closeBtn )
 	sceneGroup:insert( name )
 	sceneGroup:insert( description )
 	
