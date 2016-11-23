@@ -56,6 +56,15 @@ local function loadBackground()
   return background
 end
 
+local function loadYardBackground()
+  background = display.newImageRect( "pictures/yardwin.png", display.actualContentWidth, display.actualContentHeight )
+  background.anchorX = 0
+  background.anchorY = 0
+  background.x = 0 + display.screenOriginX 
+  background.y = 0 + display.screenOriginY
+  return background
+end
+
 local function loadLogo(y)
   titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
   titleLogo.x = display.contentCenterX
@@ -75,6 +84,7 @@ functionbag.createButtonShop = createButtonShop
 functionbag.createButtonShopItem = createButtonShopItem
 functionbag.displayAnimal = displayAnimal
 functionbag.loadBackground = loadBackground
+functionbag.loadYardBackground = loadYardBackground
 functionbag.loadLogo = loadLogo
 
 return functionbag
