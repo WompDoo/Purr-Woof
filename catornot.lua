@@ -12,6 +12,7 @@ local widget = require "widget"
 local functions = require ("utils.functions")
 local animals = require ("utils.animals")
 local cats = animals["cats"]
+local myData = require( "utils.saveddata" )
 --------------------------------------------
 
 local function onInfoBtnRelease()
@@ -31,6 +32,7 @@ local function onInfoBtnRelease()
 end  
 
 local function onHotBtnRelease()
+  myData.chosenAnimal = cats[nextcat]
   message = "You chose " .. cats[nextcat]["name"] .. "!"
   native.showAlert( "Chosen Cat", message )
 end
@@ -184,4 +186,3 @@ scene:addEventListener( "destroy", scene )
 
 return scene
 -----------------------------------------------------------------------------------------
->>>>>>> 41a0bb1375dd17c5ebebffe925dc8c9d6ceb0daa

@@ -12,6 +12,7 @@ local widget = require "widget"
 local functions = require ("utils.functions")
 local animals = require ("utils.animals")
 local dogs = animals["dogs"]
+local myData = require( "utils.saveddata" )
 --------------------------------------------
 
 local function onInfoBtnRelease()
@@ -31,8 +32,12 @@ local function onInfoBtnRelease()
 end 
 
 local function onHotBtnRelease()
+  myData.chosenAnimal = dogs[nextdog]
   message = "You chose " .. dogs[nextdog]["name"] .. "!"
 	native.showAlert( "Chosen Dog", message )
+	composer.gotoScene( "mainmenu" )
+  composer.removeScene( "dogster" )
+	return true
 end
 
 local function onNotBtnRelease()

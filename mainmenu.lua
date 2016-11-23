@@ -10,8 +10,9 @@ local scene = composer.newScene()
 -- include Corona's "widget" library
 local widget = require "widget"
 local functions = require ("utils.functions")
+local myData = require( "utils.saveddata" )
 --------------------------------------------
-
+  
 local function onYardBtnRelease()
 	composer.gotoScene( "yard", "fade", 500)
 	return true	-- indicates successful touch
@@ -42,7 +43,25 @@ function scene:create( event )
 
   local background = functions.loadBackground()
   local titleLogo = functions.loadLogo(100)
-  		
+  
+  local nameoptions = 
+      {
+          x = display.contentCenterX,
+          y = display.contentHeight - 50,
+          width = display.contentWidth * 0.8,
+          font = "dogfont.ttf",
+          fontSize = 24
+      }
+      
+  if myData.chosenAnimal then
+    nameoptions["text"] = "Your animal is " .. myData.chosenAnimal["name"] .. "!"
+  else
+    nameoptions["text"] = "You haven't chosen an animal yet!"  
+  end 
+  
+  local name = display.newText( nameoptions )
+  name:setFillColor(0, 0, 0)
+	
 	yardBtn = functions.createButton("Yard", onYardBtnRelease)
 	yardBtn.x = display.contentCenterX
 	yardBtn.y = display.contentHeight - 300
@@ -70,6 +89,7 @@ function scene:create( event )
 	sceneGroup:insert( gamesBtn )
 	sceneGroup:insert( cameraBtn )
 	sceneGroup:insert( tubBtn )
+	sceneGroup:insert( name )
 end
 
 function scene:show( event )

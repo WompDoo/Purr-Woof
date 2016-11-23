@@ -1,0 +1,3 @@
+local datastorage = {}
+
+return datastorage
