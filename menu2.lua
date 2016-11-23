@@ -10,7 +10,6 @@ local scene = composer.newScene()
 -- include Corona's "widget" library
 local widget = require "widget"
 local functions = require ("utils.functions")
-
 --------------------------------------------
 
 
@@ -39,25 +38,9 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 
-	-- Called when the scene's view does not exist.
-	-- 
-	-- INSERT code here to initialize the scene
-	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
-
-	-- display a background image
-	local background = display.newImageRect( "pictures/background.png", display.actualContentWidth, display.actualContentHeight )
-	background.anchorX = 0
-	background.anchorY = 0
-	background.x = 0 + display.screenOriginX 
-	background.y = 0 + display.screenOriginY
-
-
-	
-	-- create/position logo/title image on upper-half of the screen
-	local titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
-	titleLogo.x = display.contentCenterX
-	titleLogo.y = 100
-	
+  local background = functions.loadBackground()
+  local titleLogo = functions.loadLogo(100)
+  	
 	-- create a widget button (which will loads level1.lua on release)
 	dogBtn = functions.createButton("dog person", onDogBtnRelease)
 	dogBtn.x = display.contentCenterX

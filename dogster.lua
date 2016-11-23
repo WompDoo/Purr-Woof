@@ -18,11 +18,8 @@ local playBtn
 
 -- 'onRelease' event listener for playBtn
 local function onHotBtnRelease()
-  message = "You chose " .. animals[nextdog][1] .. "!"
+  message = "You chose " .. animals[nextdog]["name"] .. "!"
 	native.showAlert( "Chosen Dog", message )
-	-- go to level1.lua scene
-	--composer.gotoScene( "menu2", "fade", 500)
-	--return true	-- indicates successful touch
 end
 
 local function onNotBtnRelease()
@@ -30,70 +27,81 @@ local function onNotBtnRelease()
   dog:removeSelf()
   dog = nil
   if not nextdog then
-    dog = functions.displayAnimal ("pictures/Xfullred.png")
+    local ranouttext = 
+    {
+        text = "You're out of dogs!\nDon't you want to see cats instead?",
+        x = display.contentCenterX,
+        y = 220,
+        width = display.contentWidth * 0.8,
+        font = native.systemFont,
+        fontSize = 18
+    }
+    dog = display.newText( ranouttext )
+    dog:setFillColor( black )
+    backBtn.isVisible = true
+    catBtn.isVisible = true
+    hotBtn:removeSelf()
+    notBtn:removeSelf()
   else 
-    dog = functions.displayAnimal( animals[nextdog][2] )
+    dog = functions.displayAnimal( animals[nextdog]["image"] )
   end
 	return true	-- indicates successful touch
+end
+
+local function onBackBtnRelease()
+  dog:removeSelf()
+  composer.gotoScene( "mainmenu", "fade", 500)
+  return true -- indicates successful touch
+end
+
+local function onCatBtnRelease()
+  dog:removeSelf()
+  composer.gotoScene( "catornot", "fade", 500)
+  return true -- indicates successful touch
 end
 
 function scene:create( event )
 	local sceneGroup = self.view
 
-	-- Called when the scene's view does not exist.
-	-- 
-	-- INSERT code here to initialize the scene
-	-- e.g. add display objects to 'sceneGroup', add touch listeners, etc.
-
-	-- display a background image
-	local background = display.newImageRect( "pictures/background.png", display.actualContentWidth, display.actualContentHeight )
-	background.anchorX = 0
-	background.anchorY = 0
-	background.x = 0 + display.screenOriginX 
-	background.y = 0 + display.screenOriginY
-	
-	-- create/position logo/title image on upper-half of the screen
-	local titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
-	titleLogo.x = display.contentCenterX
-	titleLogo.y = 25
+	local background = functions.loadBackground()
+	local titleLogo = functions.loadLogo(25)
 	
 	nextdog = 1
-	dog = functions.displayAnimal( animals[nextdog][2] )
+	dog = functions.displayAnimal( animals[nextdog]["image"] )
 	
-	-- create a widget button (which will loads level1.lua on release)
 	notBtn = widget.newButton{
-		--label="Play Now",
-		--labelColor = { default={black}, over={128} },
 		defaultFile="pictures/Xfullred.png",
-		--over="button-over.png",
 		width=110, height=90,
 		onRelease = onNotBtnRelease	-- event listener function
 	}
 	notBtn.x = 90
 	notBtn.y = 450
-
 	
-
-	--myRectangle = display.newRect(158,175,124,30)
-	--myRectangle.strokeWidth = 3
-	--myRectangle:setFillColor( 0.5 )
-	--myRectangle:setStrokeColor( 1, 0, 0 )
-	
-	quitBtn = widget.newButton{
-		--label="Quit",
-		--labelColor = { default={black}, over={128} },
+	hotBtn = widget.newButton{
 		defaultFile="pictures/syda.png",
-		--over="button-over.png",
 		width=123, height=117,
 		onRelease = onHotBtnRelease	-- event listener function
 	}
-	quitBtn.x = 235
-	quitBtn.y = 450
+	hotBtn.x = 235
+	hotBtn.y = 450
+
+  backBtn = functions.createButton("Go back", onBackBtnRelease)
+  backBtn.x = 90
+  backBtn.y = 450
+  backBtn.isVisible = false
+
+  catBtn = functions.createButton("See cats", onCatBtnRelease)
+  catBtn.x = 235
+  catBtn.y = 450
+  catBtn.isVisible = false
+  
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
 	sceneGroup:insert( notBtn )
-	sceneGroup:insert( quitBtn )
+	sceneGroup:insert( hotBtn )
+	sceneGroup:insert( backBtn )
+	sceneGroup:insert( catBtn )
 	sceneGroup:insert( dog )
 end
 
