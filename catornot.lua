@@ -33,8 +33,23 @@ end
 
 local function onHotBtnRelease()
   myData.chosenAnimal = cats[nextcat]
-  message = "You chose " .. cats[nextcat]["name"] .. "!"
-  native.showAlert( "Chosen Cat", message )
+  message = "Are you sure you want " .. cats[nextcat]["name"] .. "?"
+  
+  local function onChosenComplete( event )
+    if ( event.action == "clicked" ) then
+        local i = event.index
+        if ( i == 1 ) then
+          -- just dismiss this
+        elseif ( i == 2 ) then
+          composer.gotoScene( "mainmenu" )
+          composer.removeScene( "catornot" )
+        end
+    end
+  end
+
+  native.showAlert( "Chosen Cat", message, { "Actually...", "Sure!" }, onChosenComplete)
+  
+  return true
 end
 
 local function onNotBtnRelease()
