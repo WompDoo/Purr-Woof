@@ -9,7 +9,8 @@ local scene = composer.newScene()
 
 -- include Corona's "widget" library
 local widget = require "widget"
-
+local functions = require ("utils.functions")
+local animals = require ("utils.animals")
 --------------------------------------------
 
 -- forward declarations and other locals
@@ -17,39 +18,22 @@ local playBtn
 
 -- 'onRelease' event listener for playBtn
 local function onHotBtnRelease()
-	
+  message = "You chose " .. animals[nextdog][1] .. "!"
+	native.showAlert( "Chosen Dog", message )
 	-- go to level1.lua scene
 	--composer.gotoScene( "menu2", "fade", 500)
 	--return true	-- indicates successful touch
 end
 
-local function onNotBtnRelease1()
-	
-	transition.to( dog1, { time=1000, alpha=0 } )
-	transition.to( dog2, { time=1000, alpha=1 } )
-	notBtn1.isVisible = false
-	notBtn2.isVisible = true
- 	
-	return true	-- indicates successful touch
-end
-
-local function onNotBtnRelease2()
-	
-	transition.to( dog2, { time=1000, alpha=0 } )
-	transition.to( dog3, { time=1000, alpha=1 } )
-	notBtn2.isVisible = false
-	notBtn3.isVisible = true
-
-	return true	-- indicates successful touch
-end
-
-local function onNotBtnRelease3()
-	
-	transition.to( dog3, { time=1000, alpha=0 } )
-	transition.to( dog1, { time=1000, alpha=1} )
-	notBtn3.isVisible = false
-	notBtn1.isVisible =true
-	
+local function onNotBtnRelease()
+  nextdog = next(animals,nextdog)
+  dog:removeSelf()
+  dog = nil
+  if not nextdog then
+    dog = functions.displayAnimal ("pictures/Xfullred.png")
+  else 
+    dog = functions.displayAnimal( animals[nextdog][2] )
+  end
 	return true	-- indicates successful touch
 end
 
@@ -73,56 +57,20 @@ function scene:create( event )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 25
 	
-	dog1 = display.newImageRect( "pictures/dog1.png", 280, 290 )
-	dog1.x = display.contentCenterX
-	dog1.y = 220
-
-	dog2 = display.newImageRect( "pictures/dog2.png", 280, 290 )
-	dog2.x = display.contentCenterX
-	dog2.y = 220
-	dog2.alpha = 0
-
-	dog3 = display.newImageRect( "pictures/cat3.png", 280, 290 )
-	dog3.x = display.contentCenterX
-	dog3.y = 220
-	dog3.alpha = 0
+	nextdog = 1
+	dog = functions.displayAnimal( animals[nextdog][2] )
 	
-	
-	notBtn2 = widget.newButton{
-		--label="Play Now",
-		--labelColor = { default={black}, over={128} },
-		defaultFile="pictures/Xfullred.png",
-		--over="button-over.png",
-		width=110, height=90,
-		onRelease = onNotBtnRelease2	-- event listener function
-	}
-	notBtn2.x = 90
-	notBtn2.y = 450
-	
-	notBtn3 = widget.newButton{
-		--label="Play Now",
-		--labelColor = { default={black}, over={128} },
-		defaultFile="pictures/Xfullred.png",
-		--over="button-over.png",
-		width=110, height=90,
-		onRelease = onNotBtnRelease3	-- event listener function
-	}
-	notBtn3.x = 90
-	notBtn3.y = 450
-
-
-
 	-- create a widget button (which will loads level1.lua on release)
-	notBtn1 = widget.newButton{
+	notBtn = widget.newButton{
 		--label="Play Now",
 		--labelColor = { default={black}, over={128} },
 		defaultFile="pictures/Xfullred.png",
 		--over="button-over.png",
 		width=110, height=90,
-		onRelease = onNotBtnRelease1	-- event listener function
+		onRelease = onNotBtnRelease	-- event listener function
 	}
-	notBtn1.x = 90
-	notBtn1.y = 450
+	notBtn.x = 90
+	notBtn.y = 450
 
 	
 
@@ -144,11 +92,9 @@ function scene:create( event )
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
-	sceneGroup:insert( notBtn3 )
-	sceneGroup:insert( notBtn2 )
-	sceneGroup:insert( notBtn1)
-	sceneGroup:insert( quitBtn)
-	sceneGroup:insert(dog1)
+	sceneGroup:insert( notBtn )
+	sceneGroup:insert( quitBtn )
+	sceneGroup:insert( dog )
 end
 
 function scene:show( event )

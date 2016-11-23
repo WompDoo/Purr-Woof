@@ -13,6 +13,14 @@ local function createButton(labeltext, functionname)
   }
 end
 
+local function displayAnimal(image)
+  animal = display.newImageRect( image, 280, 290 )
+  animal.x = display.contentCenterX
+  animal.y = 220
+  return animal
+end
+
 functionbag.createButton = createButton
+functionbag.displayAnimal = displayAnimal
 
 return functionbag
