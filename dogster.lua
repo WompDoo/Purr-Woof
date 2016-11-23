@@ -73,11 +73,11 @@ function scene:create( event )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 25
 	
-	dog1 = display.newImageRect( "pictures/dog2.png", 280, 290 )
+	dog1 = display.newImageRect( "pictures/dog1.png", 280, 290 )
 	dog1.x = display.contentCenterX
 	dog1.y = 220
 
-	dog2 = display.newImageRect( "pictures/cat2.png", 280, 290 )
+	dog2 = display.newImageRect( "pictures/dog2.png", 280, 290 )
 	dog2.x = display.contentCenterX
 	dog2.y = 220
 	dog2.alpha = 0
