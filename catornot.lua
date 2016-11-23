@@ -9,7 +9,7 @@ local scene = composer.newScene()
 
 -- include Corona's "widget" library
 local widget = require "widget"
-local functions = require ("utils.functions")
+
 --------------------------------------------
 
 -- forward declarations and other locals
@@ -82,14 +82,21 @@ function scene:create( event )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 25
 	
-	cat1 = functions.displayAnimal( "pictures/cat1.png" )
+	cat1 = display.newImageRect( "pictures/cat1.png", 280, 290 )
+	cat1.x = display.contentCenterX
+	cat1.y = 220
 	--transition.to( cat1, { time=1500, alpha=0, onComplete=onNotBtnRelease } )
 
-	cat2 = functions.displayAnimal( "pictures/cat2.png" )
-  cat2.alpha = 0
+	cat2 = display.newImageRect( "pictures/cat2.png", 280, 290 )
+	cat2.x = display.contentCenterX
+	cat2.y = 220
+	cat2.alpha = 0
 
-	cat3 = functions.displayAnimal( "pictures/cat3.png" )
+	cat3 = display.newImageRect( "pictures/cat3.png", 280, 290 )
+	cat3.x = display.contentCenterX
+	cat3.y = 220
 	cat3.alpha = 0
+	
 	
 	notBtn2 = widget.newButton{
 		--label="Play Now",
