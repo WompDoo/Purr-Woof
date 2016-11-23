@@ -10,63 +10,73 @@ local scene = composer.newScene()
 -- include Corona's "widget" library
 local widget = require "widget"
 local functions = require ("utils.functions")
+local animals = require ("utils.animals")
+local cats = animals["cats"]
 --------------------------------------------
 
--- forward declarations and other locals
-local function oninfoBtnRelease()
-	
-	composer.showOverlay("info", "fade")
-	infoBtn.isVisible = false
-	closeBtn.isVisible = true
-	
-	return true	-- indicates successful touch
-end 
+local function onInfoBtnRelease()
+  local infooptions =
+  {
+    isModal = true,
+    effect = "fade",
+    params = {
+        animal = cats[nextcat]
+    }
+  }
+  composer.showOverlay("info", infooptions)
+  
+  infoBtn.isVisible = false
+  
+  return true -- indicates successful touch
+end  
 
--- 'onRelease' event listener for playBtn
 local function onHotBtnRelease()
-	
-	-- go to level1.lua scene
-	--composer.gotoScene( "menu2", "fade", 500)
-	--return true	-- indicates successful touch
+  message = "You chose " .. cats[nextcat]["name"] .. "!"
+  native.showAlert( "Chosen Cat", message )
 end
 
-local function onNotBtnRelease1()
-	
-	transition.to( cat1, { time=1000, alpha=0 } )
-	transition.to( cat2, { time=1000, alpha=1 } )
-	--cat1:removeSelf()
-	--cat1=nil
-	-- go to level1.lua scene
-	notBtn1.isVisible = false
-	notBtn2.isVisible = true
- 	
-	return true	-- indicates successful touch
+local function onNotBtnRelease()
+  local sceneGroup = scene.view
+  
+  nextcat = next(cats,nextcat)
+  cat:removeSelf()
+  cat = nil
+  if not nextcat then
+    local ranouttext = 
+    {
+        text = "You're out of cats!\nDon't you want to see dogs instead?",
+        x = display.contentCenterX,
+        y = 220,
+        width = display.contentWidth * 0.8,
+        font = native.systemFont,
+        fontSize = 18
+    }
+    cat = display.newText( ranouttext )
+    cat:setFillColor( black )
+    sceneGroup:insert( cat )
+    backBtn.isVisible = true
+    dogBtn.isVisible = true
+    hotBtn:removeSelf()
+    notBtn:removeSelf()
+    infoBtn:removeSelf()
+  else 
+    cat = functions.displayAnimal( cats[nextcat]["image"] )
+    sceneGroup:insert( cat )
+    infoBtn:toFront()
+  end
+  return true -- indicates successful touch
 end
 
-local function onNotBtnRelease2()
-	
-	transition.to( cat2, { time=1000, alpha=0 } )
-	transition.to( cat3, { time=1000, alpha=1 } )
-	--cat1:removeSelf()
-	--cat1=nil
-	-- go to level1.lua scene
-	notBtn2.isVisible = false
-	notBtn3.isVisible = true
-
-	return true	-- indicates successful touch
+local function onBackBtnRelease()
+  composer.gotoScene( "mainmenu" )
+  composer.removeScene( "catornot" )
+  return true -- indicates successful touch
 end
 
-local function onNotBtnRelease3()
-	
-	transition.to( cat3, { time=1000, alpha=0 } )
-	transition.to( cat1, { time=1000, alpha=1} )
-	--cat1:removeSelf()
-	--cat1=nil
-	-- go to level1.lua scene
-	notBtn3.isVisible = false
-	notBtn1.isVisible =true
-	
-	return true	-- indicates successful touch
+local function onDogBtnRelease()
+  composer.gotoScene( "dogster" )
+  composer.removeScene( "catornot" )
+  return true -- indicates successful touch
 end
 
 function scene:create( event )
@@ -75,87 +85,51 @@ function scene:create( event )
   local background = functions.loadBackground()
   local titleLogo = functions.loadLogo(25)
 	
-	cat1 = functions.displayAnimal( "pictures/cat1.png" )
-	--transition.to( cat1, { time=1500, alpha=0, onComplete=onNotBtnRelease } )
-
-	cat2 = functions.displayAnimal( "pictures/cat2.png" )
-  cat2.alpha = 0
-
-	cat3 = functions.displayAnimal( "pictures/cat3.png" )
-	cat3.alpha = 0
-	
-	notBtn2 = widget.newButton{
-		--label="Play Now",
-		--labelColor = { default={black}, over={128} },
+	nextcat = 1
+  cat = functions.displayAnimal( cats[nextcat]["image"] )
+ 
+ 	notBtn = widget.newButton{
 		defaultFile="pictures/Xfullred.png",
-		--over="button-over.png",
 		width=110, height=90,
-		onRelease = onNotBtnRelease2	-- event listener function
+		onRelease = onNotBtnRelease	-- event listener function
 	}
-	notBtn2.x = 90
-	notBtn2.y = 450
-	
-	notBtn3 = widget.newButton{
-		--label="Play Now",
-		--labelColor = { default={black}, over={128} },
-		defaultFile="pictures/Xfullred.png",
-		--over="button-over.png",
-		width=110, height=90,
-		onRelease = onNotBtnRelease3	-- event listener function
-	}
-	notBtn3.x = 90
-	notBtn3.y = 450
-
-
-
-	-- create a widget button (which will loads level1.lua on release)
-	notBtn1 = widget.newButton{
-		--label="Play Now",
-		--labelColor = { default={black}, over={128} },
-		defaultFile="pictures/Xfullred.png",
-		--over="button-over.png",
-		width=110, height=90,
-		onRelease = onNotBtnRelease1	-- event listener function
-	}
-	notBtn1.x = 90
-	notBtn1.y = 450
+	notBtn.x = 90
+	notBtn.y = 450
 
 	infoBtn = widget.newButton{
-		--label="Info",
-		--labelColor = { default={black}, over={128} },
 		defaultFile="pictures/info.png",
-		--over="button-over.png",
 		width=40, height=40,
-		onRelease = oninfoBtnRelease	-- event listener function
+		onRelease = onInfoBtnRelease
 	}
-
-
 	infoBtn.x = 265
 	infoBtn.y = 106
 
-	--myRectangle = display.newRect(158,175,124,30)
-	--myRectangle.strokeWidth = 3
-	--myRectangle:setFillColor( 0.5 )
-	--myRectangle:setStrokeColor( 1, 0, 0 )
-	
-	quitBtn = widget.newButton{
-		--label="Quit",
-		--labelColor = { default={black}, over={128} },
+	hotBtn = widget.newButton{
 		defaultFile="pictures/syda.png",
-		--over="button-over.png",
 		width=123, height=117,
 		onRelease = onHotBtnRelease	-- event listener function
 	}
-	quitBtn.x = 235
-	quitBtn.y = 450
-	-- all display objects must be inserted into group
+	hotBtn.x = 235
+	hotBtn.y = 450
+	
+	backBtn = functions.createButton("Go back", onBackBtnRelease)
+  backBtn.x = 90
+  backBtn.y = 450
+  backBtn.isVisible = false
+
+  dogBtn = functions.createButton("See dogs", onDogBtnRelease)
+  dogBtn.x = 235
+  dogBtn.y = 450
+  dogBtn.isVisible = false
+	
 	sceneGroup:insert( background )
-	sceneGroup:insert( titleLogo )
-	sceneGroup:insert( notBtn3 )
-	sceneGroup:insert( notBtn2 )
-	sceneGroup:insert( notBtn1)
-	sceneGroup:insert( quitBtn)
-	sceneGroup:insert(cat1)
+  sceneGroup:insert( titleLogo )
+  sceneGroup:insert( notBtn )
+  sceneGroup:insert( hotBtn )
+  sceneGroup:insert( backBtn )
+  sceneGroup:insert( dogBtn )
+  sceneGroup:insert( cat )
+  sceneGroup:insert( infoBtn )
 end
 
 function scene:show( event )
