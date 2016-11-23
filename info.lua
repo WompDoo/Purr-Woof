@@ -16,7 +16,6 @@ local function oncloseBtnRelease()
 	
 	composer.hideOverlay("slideUp", 400)
 	infoBtn.isVisible = true
-	closeBtn.isVisible = false
 	
 	return true	-- indicates successful touch
 end
