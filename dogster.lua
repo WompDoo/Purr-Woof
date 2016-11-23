@@ -9,7 +9,7 @@ local scene = composer.newScene()
 
 -- include Corona's "widget" library
 local widget = require "widget"
-
+local functions = require ("utils.functions")
 --------------------------------------------
 
 -- forward declarations and other locals
@@ -73,18 +73,12 @@ function scene:create( event )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 25
 	
-	dog1 = display.newImageRect( "pictures/dog2.png", 280, 290 )
-	dog1.x = display.contentCenterX
-	dog1.y = 220
-
-	dog2 = display.newImageRect( "pictures/cat2.png", 280, 290 )
-	dog2.x = display.contentCenterX
-	dog2.y = 220
+	dog1 = functions.displayAnimal( "pictures/dog2.png" )
+	
+	dog2 = functions.displayAnimal( "pictures/cat2.png" )
 	dog2.alpha = 0
 
-	dog3 = display.newImageRect( "pictures/cat3.png", 280, 290 )
-	dog3.x = display.contentCenterX
-	dog3.y = 220
+	dog3 = functions.displayAnimal( "pictures/cat3.png" )
 	dog3.alpha = 0
 	
 	
