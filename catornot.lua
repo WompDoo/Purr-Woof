@@ -13,8 +13,9 @@ local widget = require "widget"
 --------------------------------------------
 
 -- forward declarations and other locals
-local playBtn
-
+function scene:resumeGame()
+   composer.gotoScene("catornot", "fade")
+end
 -- 'onRelease' event listener for playBtn
 local function onHotBtnRelease()
 	
@@ -62,6 +63,15 @@ local function onNotBtnRelease3()
 	return true	-- indicates successful touch
 end
 
+local function oninfoBtnRelease()
+	
+	composer.showOverlay("info", "fade")
+	infoBtn.isVisible = false
+	closeBtn.isVisible = true
+	
+	return true	-- indicates successful touch
+end 
+
 function scene:create( event )
 	local sceneGroup = self.view
 
@@ -81,6 +91,8 @@ function scene:create( event )
 	local titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 25
+
+
 	
 	cat1 = display.newImageRect( "pictures/cat1.png", 280, 290 )
 	cat1.x = display.contentCenterX
@@ -108,6 +120,21 @@ function scene:create( event )
 	}
 	notBtn2.x = 90
 	notBtn2.y = 450
+
+
+
+	infoBtn = widget.newButton{
+		--label="Info",
+		--labelColor = { default={black}, over={128} },
+		defaultFile="pictures/info.png",
+		--over="button-over.png",
+		width=40, height=40,
+		onRelease = oninfoBtnRelease	-- event listener function
+	}
+
+
+	infoBtn.x = 265
+	infoBtn.y = 106
 	
 	notBtn3 = widget.newButton{
 		--label="Play Now",
