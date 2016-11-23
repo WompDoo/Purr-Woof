@@ -18,7 +18,7 @@ local function onInfoBtnRelease()
   local infooptions =
   {
     isModal = true,
-    effect = "fade",
+    effect = "slideDown",
     params = {
         animal = cats[nextcat]
     }
@@ -48,8 +48,8 @@ local function onNotBtnRelease()
         x = display.contentCenterX,
         y = 220,
         width = display.contentWidth * 0.8,
-        font = native.systemFont,
-        fontSize = 18
+        font = "dogfont.ttf",
+        fontSize = 28
     }
     cat = display.newText( ranouttext )
     cat:setFillColor( black )
