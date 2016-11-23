@@ -73,9 +73,9 @@ function scene:create( event )
 	titleLogo.x = display.contentCenterX
 	titleLogo.y = 25
 	
-	dog1 = functions.displayAnimal( "pictures/dog2.png" )
-	
-	dog2 = functions.displayAnimal( "pictures/cat2.png" )
+	dog1 = functions.displayAnimal( "pictures/dog1.png" )
+
+	dog2 = functions.displayAnimal( "pictures/dog2.png" )
 	dog2.alpha = 0
 
 	dog3 = functions.displayAnimal( "pictures/cat3.png" )
