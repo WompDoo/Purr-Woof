@@ -37,41 +37,65 @@ local function onTubBtnRelease()
   return true -- indicates successful touch
 end
 
+local function onItemBtnRelease()
+  message = "Do You want to buy this?"
+  native.showAlert( "Chosen Cat", message )
+end
+
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local background = display.newImageRect( "pictures/background.png", display.actualContentWidth, display.actualContentHeight )
-	background.anchorX = 0
-	background.anchorY = 0
-	background.x = 0 + display.screenOriginX 
-	background.y = 0 + display.screenOriginY
+	local background = functions.loadBackground()
+	local titleLogo = functions.loadLogo(5)
 		
-	yardBtn = functions.createButtonShop("Cat", onYardBtnRelease)
-	yardBtn.x = display.contentWidth - 290
-	yardBtn.y = display.contentHeight - 450
+  catBtn = functions.createButtonShop("Cat", onYardBtnRelease)
+  catBtn.x = display.contentWidth - 290
+  catBtn.y = display.contentHeight - 400
 
-  shopBtn = functions.createButtonShop("Dog", onShopBtnRelease)
-  shopBtn.x = display.contentWidth - 290
-  shopBtn.y = display.contentHeight - 400
+  dogBtn = functions.createButtonShop("Dog", onShopBtnRelease)
+  dogBtn.x = display.contentWidth - 290
+  dogBtn.y = display.contentHeight - 330
   
-  gamesBtn = functions.createButtonShop("Food", onGamesBtnRelease)
-  gamesBtn.x = display.contentWidth - 290
-  gamesBtn.y = display.contentHeight - 350
+  foodBtn = functions.createButtonShop("Food", onGamesBtnRelease)
+  foodBtn.x = display.contentWidth - 290
+  foodBtn.y = display.contentHeight - 260
   
-  cameraBtn = functions.createButtonShop("Toys", onCameraBtnRelease)
-  cameraBtn.x = display.contentWidth - 290
-  cameraBtn.y = display.contentHeight - 300
+  toysBtn = functions.createButtonShop("Toys", onCameraBtnRelease)
+  toysBtn.x = display.contentWidth - 290
+  toysBtn.y = display.contentHeight - 190
 
-  cameraBtn = functions.createButtonShopItem("Item 1", onCameraBtnRelease)
-  cameraBtn.x = display.contentWidth - 200
-  cameraBtn.y = display.contentHeight - 450
+  item1Btn = functions.createButtonShopItem("999", onItemBtnRelease)
+  item1Btn.x = display.contentWidth - 170
+  item1Btn.y = display.contentHeight - 370
 
+  item2Btn = functions.createButtonShopItem("999", onItemBtnRelease)
+  item2Btn.x = display.contentWidth - 60
+  item2Btn.y = display.contentHeight - 370
+	
+  item3Btn = functions.createButtonShopItem("999", onItemBtnRelease)
+  item3Btn.x = display.contentWidth - 170
+  item3Btn.y = display.contentHeight - 240
+
+  item4Btn = functions.createButtonShopItem("999", onItemBtnRelease)
+  item4Btn.x = display.contentWidth - 60
+  item4Btn.y = display.contentHeight - 240
+
+  item5Btn = functions.createButtonShopItem("999", onItemBtnRelease)
+  item5Btn.x = display.contentWidth - 170
+  item5Btn.y = display.contentHeight - 120
   
 	sceneGroup:insert( background )
-	sceneGroup:insert( yardBtn )
-	sceneGroup:insert( shopBtn )
-	sceneGroup:insert( gamesBtn )
-	sceneGroup:insert( cameraBtn )
+	sceneGroup:insert( titleLogo )
+	sceneGroup:insert( catBtn )
+	sceneGroup:insert( dogBtn )
+	sceneGroup:insert( foodBtn )
+	sceneGroup:insert( toysBtn )
+	sceneGroup:insert( item1Btn )
+	sceneGroup:insert( item2Btn )
+	sceneGroup:insert( item3Btn )
+	sceneGroup:insert( item4Btn )
+	sceneGroup:insert( item5Btn )
+
 end
 
 function scene:show( event )
