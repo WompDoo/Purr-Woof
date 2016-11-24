@@ -42,7 +42,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 
   local background = functions.loadBackground()
-  local titleLogo = functions.loadLogo(100)
+  local titleLogo = functions.loadLogo(50)
   
   local nameoptions = 
       {
@@ -64,23 +64,23 @@ function scene:create( event )
 	
 	yardBtn = functions.createButton("Yard", onYardBtnRelease)
 	yardBtn.x = display.contentCenterX
-	yardBtn.y = display.contentHeight - 300
+	yardBtn.y = display.contentHeight - 350
 
   shopBtn = functions.createButton("Shop", onShopBtnRelease)
   shopBtn.x = display.contentCenterX
-  shopBtn.y = display.contentHeight - 250
+  shopBtn.y = display.contentHeight - 290
   
   gamesBtn = functions.createButton("Games", onGamesBtnRelease)
   gamesBtn.x = display.contentCenterX
-  gamesBtn.y = display.contentHeight - 200
+  gamesBtn.y = display.contentHeight - 230
   
   cameraBtn = functions.createButton("Camera", onCameraBtnRelease)
   cameraBtn.x = display.contentCenterX
-  cameraBtn.y = display.contentHeight - 150
+  cameraBtn.y = display.contentHeight - 170
   
   tubBtn = functions.createButton("Tub", onTubBtnRelease)
   tubBtn.x = display.contentCenterX
-  tubBtn.y = display.contentHeight - 100
+  tubBtn.y = display.contentHeight - 110
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
