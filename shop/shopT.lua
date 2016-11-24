@@ -12,13 +12,14 @@ local widget = require "widget"
 local functions = require ("utils.functions")
 --------------------------------------------
 
-local function onCatBtnRelease()
+
+local function onDogBtnRelease()
 	local infooptions =
   {
     isModal = true,
     --effect = "slideDown",
   }
-  composer.showOverlay("shop.shopC", infooptions)
+  composer.showOverlay("shop.shopD", infooptions)
   
   return true -- indicates successful touch
 end  
@@ -34,24 +35,13 @@ local function onFoodBtnRelease()
   return true -- indicates successful touch
 end  
 
-local function onToysBtnRelease()
+local function onCatBtnRelease()
   local infooptions =
   {
     isModal = true,
     --effect = "slideDown",
   }
-  composer.showOverlay("shop.shopT", infooptions)
-  
-  return true -- indicates successful touch
-end  
-
-local function onDogBtnRelease()
-  local infooptions =
-  {
-    isModal = true,
-    --effect = "slideDown",
-  }
-  composer.showOverlay("shop.shopD", infooptions)
+  composer.showOverlay("shop.shopC", infooptions)
   
   return true -- indicates successful touch
 end  
@@ -108,8 +98,7 @@ function onButtonTouch( event )
         print( "Touch event ended on: " .. event.target.id )
     end
     return true
-end
-  
+end 
 
 function scene:create( event )
 
@@ -143,38 +132,6 @@ function scene:create( event )
   item2Btn.x = display.contentWidth - 60
   item2Btn.y = display.contentHeight - 420
 	
-  item3Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item3Btn.x = display.contentWidth - 170
-  item3Btn.y = display.contentHeight - 290
-
-  item4Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item4Btn.x = display.contentWidth - 60
-  item4Btn.y = display.contentHeight - 290
-
-  item5Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item5Btn.x = display.contentWidth - 170
-  item5Btn.y = display.contentHeight - 170
-
-  item6Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item6Btn.x = display.contentWidth - 60
-  item6Btn.y = display.contentHeight - 170
-  
-
-  item7Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item7Btn.x = display.contentWidth - 170
-  item7Btn.y = display.contentHeight - 50
-	
-  item8Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item8Btn.x = display.contentWidth - 60
-  item8Btn.y = display.contentHeight - 50
-
-  item9Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item9Btn.x = display.contentWidth - 170
-  item9Btn.y = display.contentHeight - -70
-
-  item10Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item10Btn.x = display.contentWidth - 60
-  item10Btn.y = display.contentHeight - -70
 
 scrollView = widget.newScrollView(
     {
@@ -189,23 +146,14 @@ scrollView = widget.newScrollView(
 
 scrollView:insert( item1Btn )
 scrollView:insert( item2Btn )
-scrollView:insert( item3Btn )
-scrollView:insert( item4Btn )
-scrollView:insert( item5Btn )
-scrollView:insert( item6Btn )
-scrollView:insert( item7Btn )
-scrollView:insert( item8Btn )
-scrollView:insert( item9Btn )
-scrollView:insert( item10Btn )
-  
-	sceneGroup:insert( background )
-	sceneGroup:insert( titleLogo )
-	sceneGroup:insert( scrollView )
-	sceneGroup:insert( catBtn )
-	sceneGroup:insert( dogBtn )
-	sceneGroup:insert( foodBtn )
-	sceneGroup:insert( toysBtn )
-	
+
+sceneGroup:insert( background )
+  sceneGroup:insert( titleLogo )
+  sceneGroup:insert( scrollView )
+  sceneGroup:insert( catBtn )
+  sceneGroup:insert( dogBtn )
+  sceneGroup:insert( foodBtn )
+  sceneGroup:insert( toysBtn )
 	--sceneGroup:insert( item2Btn )
 	--sceneGroup:insert( item3Btn )
 	--sceneGroup:insert( item4Btn )
