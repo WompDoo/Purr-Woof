@@ -12,35 +12,14 @@ local widget = require "widget"
 local functions = require ("utils.functions")
 --------------------------------------------
 
+
 local function onCatBtnRelease()
-	local infooptions =
+  local infooptions =
   {
     isModal = true,
     --effect = "slideDown",
   }
   composer.showOverlay("shop.shopC", infooptions)
-  
-  return true -- indicates successful touch
-end  
-
-local function onFoodBtnRelease()
-  local infooptions =
-  {
-    isModal = true,
-    --effect = "slideDown",
-  }
-  composer.showOverlay("shop.shopF", infooptions)
-  
-  return true -- indicates successful touch
-end  
-
-local function onToysBtnRelease()
-  local infooptions =
-  {
-    isModal = true,
-    --effect = "slideDown",
-  }
-  composer.showOverlay("shop.shopT", infooptions)
   
   return true -- indicates successful touch
 end  
@@ -52,6 +31,17 @@ local function onDogBtnRelease()
     --effect = "slideDown",
   }
   composer.showOverlay("shop.shopD", infooptions)
+  
+  return true -- indicates successful touch
+end  
+
+local function onToysBtnRelease()
+  local infooptions =
+  {
+    isModal = true,
+    --effect = "slideDown",
+  }
+  composer.showOverlay("shop.shopT", infooptions)
   
   return true -- indicates successful touch
 end  
@@ -99,25 +89,24 @@ function onButtonTouch( event )
     if ( event.phase == "began" ) then
         print( "Touch event began on: " .. event.target.id )
     elseif ( event.phase == "moved" ) then
-    	local dy = math.abs(event.y - event.yStart)
+      local dy = math.abs(event.y - event.yStart)
 
-    	if dy > 5 then
-    		scrollView:takeFocus(event)
-    	end
+      if dy > 5 then
+        scrollView:takeFocus(event)
+      end
     elseif ( event.phase == "ended" ) then
         print( "Touch event ended on: " .. event.target.id )
     end
     return true
-end
-  
+end 
 
 function scene:create( event )
 
-	local sceneGroup = self.view
+  local sceneGroup = self.view
 
-	local background = functions.loadBackground()
-	local titleLogo = functions.loadLogo(5)
-		
+  local background = functions.loadBackground()
+  local titleLogo = functions.loadLogo(5)
+    
   catBtn = functions.createButtonShop("Cat", onCatBtnRelease)
   catBtn.x = display.contentWidth - 290
   catBtn.y = display.contentHeight - 400
@@ -142,7 +131,7 @@ function scene:create( event )
   item2Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item2Btn.x = display.contentWidth - 60
   item2Btn.y = display.contentHeight - 420
-	
+  
   item3Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item3Btn.x = display.contentWidth - 170
   item3Btn.y = display.contentHeight - 290
@@ -158,28 +147,15 @@ function scene:create( event )
   item6Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item6Btn.x = display.contentWidth - 60
   item6Btn.y = display.contentHeight - 170
-  
 
   item7Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item7Btn.x = display.contentWidth - 170
   item7Btn.y = display.contentHeight - 50
-	
-  item8Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item8Btn.x = display.contentWidth - 60
-  item8Btn.y = display.contentHeight - 50
-
-  item9Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item9Btn.x = display.contentWidth - 170
-  item9Btn.y = display.contentHeight - -70
-
-  item10Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item10Btn.x = display.contentWidth - 60
-  item10Btn.y = display.contentHeight - -70
 
 scrollView = widget.newScrollView(
     {
-    	backgroundColor = { 0.0, 0.0, 0.0, 0},
-    	horizontalScrollDisabled = true,
+      backgroundColor = { 0.0, 0.0, 0.0, 0},
+      horizontalScrollDisabled = true,
         top = 52,
         --scrollWidth = 600,
         --scrollHeight = 490,
@@ -194,65 +170,61 @@ scrollView:insert( item4Btn )
 scrollView:insert( item5Btn )
 scrollView:insert( item6Btn )
 scrollView:insert( item7Btn )
-scrollView:insert( item8Btn )
-scrollView:insert( item9Btn )
-scrollView:insert( item10Btn )
-  
-	sceneGroup:insert( background )
-	sceneGroup:insert( titleLogo )
-	sceneGroup:insert( scrollView )
-	sceneGroup:insert( catBtn )
-	sceneGroup:insert( dogBtn )
-	sceneGroup:insert( foodBtn )
-	sceneGroup:insert( toysBtn )
-	
-	--sceneGroup:insert( item2Btn )
-	--sceneGroup:insert( item3Btn )
-	--sceneGroup:insert( item4Btn )
-	--sceneGroup:insert( item5Btn )
+
+  sceneGroup:insert( background )
+  sceneGroup:insert( titleLogo )
+  sceneGroup:insert( scrollView )
+  sceneGroup:insert( catBtn )
+  sceneGroup:insert( dogBtn )
+  sceneGroup:insert( foodBtn )
+  sceneGroup:insert( toysBtn )
+  --sceneGroup:insert( item2Btn )
+  --sceneGroup:insert( item3Btn )
+  --sceneGroup:insert( item4Btn )
+  --sceneGroup:insert( item5Btn )
 
 end
 
 function scene:show( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-	
-	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
-	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
-	end	
+  local sceneGroup = self.view
+  local phase = event.phase
+  
+  if phase == "will" then
+    -- Called when the scene is still off screen and is about to move on screen
+  elseif phase == "did" then
+    -- Called when the scene is now on screen
+    -- 
+    -- INSERT code here to make the scene come alive
+    -- e.g. start timers, begin animation, play audio, etc.
+  end 
 end
 
 function scene:hide( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-	
-	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
-	elseif phase == "did" then
-		-- Called when the scene is now off screen
-	end	
+  local sceneGroup = self.view
+  local phase = event.phase
+  
+  if event.phase == "will" then
+    -- Called when the scene is on screen and is about to move off screen
+    --
+    -- INSERT code here to pause the scene
+    -- e.g. stop timers, stop animation, unload sounds, etc.)
+  elseif phase == "did" then
+    -- Called when the scene is now off screen
+  end 
 end
 
 function scene:destroy( event )
-	local sceneGroup = self.view
+  local sceneGroup = self.view
 
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
-	
-	if playBtn then
-		playBtn:removeSelf()	-- widgets must be manually removed
-		playBtn = nil
-	end
+  -- Called prior to the removal of scene's "view" (sceneGroup)
+  -- 
+  -- INSERT code here to cleanup the scene
+  -- e.g. remove display objects, remove touch listeners, save state, etc.
+  
+  if playBtn then
+    playBtn:removeSelf()  -- widgets must be manually removed
+    playBtn = nil
+  end
 end
 
 ---------------------------------------------------------------------------------

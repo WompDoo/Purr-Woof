@@ -32,7 +32,6 @@ local function onInfoBtnRelease()
 end  
 
 local function onHotBtnRelease()
-  myData.chosenAnimal = cats[nextcat]
   message = "Are you sure you want " .. cats[nextcat]["name"] .. "?"
   
   local function onChosenComplete( event )
@@ -41,8 +40,9 @@ local function onHotBtnRelease()
         if ( i == 1 ) then
           -- just dismiss this
         elseif ( i == 2 ) then
-          composer.gotoScene( "mainmenu" )
-          composer.removeScene( "catornot" )
+        	myData.chosenAnimal = cats[nextcat]
+        	composer.gotoScene( "mainmenu" )
+        	composer.removeScene( "catornot" )
         end
     end
   end
