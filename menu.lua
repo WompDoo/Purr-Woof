@@ -50,11 +50,11 @@ function scene:create( event )
 	
 	quitBtn = functions.createButton("Quit", onQuitBtnRelease)
 	quitBtn.x = display.contentCenterX
-	quitBtn.y = display.contentHeight - 255
+	quitBtn.y = display.contentHeight - 240
 
   menuBtn = functions.createButton("Menu", onMenuBtnRelease)
   menuBtn.x = display.contentCenterX
-  menuBtn.y = display.contentHeight - 100
+  menuBtn.y = display.contentHeight - 80
   
 	-- all display objects must be inserted into group
 	sceneGroup:insert( background )

@@ -19,6 +19,7 @@ end
 
 local function onShopBtnRelease()
   composer.gotoScene( "shop", "fade", 500)
+  listener = scrollListener
   return true -- indicates successful touch
 end
 
@@ -51,11 +52,33 @@ local function onItemBtnRelease()
   end 
 
   native.showAlert( "Purrchase confirmation", message, { "No", "Yes" }, onChosenComplete)
+end
 
+local function scrollListener( event )
 
+    local phase = event.phase
+    if ( phase == "began" ) then 
+    
+    elseif ( phase == "moved" ) then 
+    
+    elseif ( phase == "ended" ) then 
+    
+    end
+
+    -- In the event a scroll limit is reached...
+    if ( event.limitReached ) then
+        if ( event.direction == "up" ) then
+    
+        elseif ( event.direction == "down" ) then
+    
+        end
+    end
+
+    return true
 end
 
 function scene:create( event )
+
 	local sceneGroup = self.view
 
 	local background = functions.loadBackground()
@@ -79,23 +102,40 @@ function scene:create( event )
 
   item1Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item1Btn.x = display.contentWidth - 170
-  item1Btn.y = display.contentHeight - 370
+  item1Btn.y = display.contentHeight - 420
 
   item2Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item2Btn.x = display.contentWidth - 60
-  item2Btn.y = display.contentHeight - 370
+  item2Btn.y = display.contentHeight - 420
 	
   item3Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item3Btn.x = display.contentWidth - 170
-  item3Btn.y = display.contentHeight - 240
+  item3Btn.y = display.contentHeight - 290
 
   item4Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item4Btn.x = display.contentWidth - 60
-  item4Btn.y = display.contentHeight - 240
+  item4Btn.y = display.contentHeight - 290
 
   item5Btn = functions.createButtonShopItem("999", onItemBtnRelease)
   item5Btn.x = display.contentWidth - 170
-  item5Btn.y = display.contentHeight - 120
+  item5Btn.y = display.contentHeight - 170
+
+local scrollView = widget.newScrollView(
+    {
+    	backgroundColor = { 0.0, 0.0, 0.0, 0},
+    	horizontalScrollDisabled = true,
+        top = 52,
+        --scrollWidth = 600,
+        --scrollHeight = 490,
+        listener = scrollListener
+    }
+)
+
+scrollView:insert( item1Btn )
+scrollView:insert( item2Btn )
+scrollView:insert( item3Btn )
+scrollView:insert( item4Btn )
+scrollView:insert( item5Btn )
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
@@ -103,11 +143,11 @@ function scene:create( event )
 	sceneGroup:insert( dogBtn )
 	sceneGroup:insert( foodBtn )
 	sceneGroup:insert( toysBtn )
-	sceneGroup:insert( item1Btn )
-	sceneGroup:insert( item2Btn )
-	sceneGroup:insert( item3Btn )
-	sceneGroup:insert( item4Btn )
-	sceneGroup:insert( item5Btn )
+	sceneGroup:insert( scrollView )
+	--sceneGroup:insert( item2Btn )
+	--sceneGroup:insert( item3Btn )
+	--sceneGroup:insert( item4Btn )
+	--sceneGroup:insert( item5Btn )
 
 end
 

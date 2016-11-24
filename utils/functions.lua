@@ -6,11 +6,18 @@ local function createButton(labeltext, functionname)
   return widget.newButton{
     label=labeltext,
     labelColor = { default={black}, over={128} },
+<<<<<<< Updated upstream
     default="button.png",
     over="button-over.png",
     width=154, height=40,
     font = "dogfont.ttf",
     fontSize = 28,
+=======
+    defaultFile="pictures/button3.png",
+    font = "dogfont.ttf",
+    fontSize = 28,
+    width=154, height=65,
+>>>>>>> Stashed changes
     onRelease = functionname  -- event listener function
   }
 end
