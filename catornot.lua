@@ -77,7 +77,7 @@ local function onNotBtnRelease()
     notBtn:removeSelf()
     infoBtn:removeSelf()
   else 
-    cat = functions.displayAnimal( cats[nextcat]["image"] )
+    cat = functions.displayAnimalTinder( cats[nextcat]["image"] )
     sceneGroup:insert( cat )
     infoBtn:toFront()
   end
@@ -103,7 +103,7 @@ function scene:create( event )
   local titleLogo = functions.loadLogo(25)
 	
 	nextcat = 1
-  cat = functions.displayAnimal( cats[nextcat]["image"] )
+  cat = functions.displayAnimalTinder( cats[nextcat]["image"] )
  
  	notBtn = widget.newButton{
 		defaultFile="pictures/Xfullred.png",
