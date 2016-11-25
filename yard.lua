@@ -1,6 +1,7 @@
 
 local composer = require( "composer" )
 local functions = require( "utils.functions" )
+local myData = require( "utils.saveddata" )
 
 local scene = composer.newScene()
 
@@ -9,7 +10,14 @@ local sceneGroup = self.view
 
 local background = functions.loadYardBackground()
 
+if myData.chosenAnimal then
+  local animal = functions.displayAnimalYard(myData.chosenAnimal["yardimage"])
+end
+
 sceneGroup:insert( background )
+if animal then
+  sceneGroup:insert( animal )
+end
 
 end
 
