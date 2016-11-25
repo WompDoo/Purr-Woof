@@ -11,7 +11,12 @@ local sceneGroup = self.view
 local background = functions.loadYardBackground()
 
 if myData.chosenAnimal then
-  animal = functions.animateAnimal(myData.chosenAnimal["idleanim"])
+  chance = math.random()
+  if chance > 0.5 then 
+    animal = functions.animateAnimal(myData.chosenAnimal["idleanim"])
+  else
+    animal = functions.animateAnimal(myData.chosenAnimal["walkanim"])
+  end
   animal.x = display.contentCenterX
   animal.y = display.actualContentHeight - (animal.height*0.5)
   animal:scale(0.5, 0.5)

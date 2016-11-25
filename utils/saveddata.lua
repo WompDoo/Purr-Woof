@@ -1,3 +1,3 @@
-local datastorage = {}
+local datastorage = { purchasedItems = {} }
 
 return datastorage
