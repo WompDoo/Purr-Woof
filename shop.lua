@@ -10,49 +10,31 @@ local scene = composer.newScene()
 -- include Corona's "widget" library
 local widget = require "widget"
 local functions = require ("utils.functions")
+local items = require ("utils.items")
 --------------------------------------------
 
 local function onCatBtnRelease()
-	local infooptions =
-  {
-    isModal = true,
-    --effect = "slideDown",
-  }
-  composer.showOverlay("shop.shopC", infooptions)
-  
+  refreshScrollView("Cat")
   return true -- indicates successful touch
 end  
 
 local function onFoodBtnRelease()
-  local infooptions =
-  {
-    isModal = true,
-    --effect = "slideDown",
-  }
-  composer.showOverlay("shop.shopF", infooptions)
-  
+  refreshScrollView("Food")
   return true -- indicates successful touch
 end  
 
 local function onToysBtnRelease()
-  local infooptions =
-  {
-    isModal = true,
-    --effect = "slideDown",
-  }
-  composer.showOverlay("shop.shopT", infooptions)
-  
+  refreshScrollView("Toy")
   return true -- indicates successful touch
 end  
 
 local function onDogBtnRelease()
-  local infooptions =
-  {
-    isModal = true,
-    --effect = "slideDown",
-  }
-  composer.showOverlay("shop.shopD", infooptions)
-  
+  refreshScrollView("Dog")  
+  return true -- indicates successful touch
+end  
+
+local function onAllBtnRelease()
+  refreshScrollView("All")  
   return true -- indicates successful touch
 end  
 
@@ -109,15 +91,65 @@ function onButtonTouch( event )
     end
     return true
 end
-  
 
+function loadScrollView (filter)
+  local scrollView = widget.newScrollView(
+    {
+      backgroundColor = { 0.0, 0.0, 0.0, 0},
+      horizontalScrollDisabled = true,
+        top = 52,
+        --scrollWidth = 600,
+        --scrollHeight = 490,
+        listener = scrollListener
+    }
+  )
+
+  local levelButton = {}
+  local positionX = display.contentWidth - 170
+  local positionY = display.contentHeight - 410
+  local useditems = 0
+  for i=1, #items do
+    if (items[i]["type"] == filter) or (filter == "All") then 
+      levelButton[i] = functions.createButtonShopItem(items[i]["name"], onItemBtnRelease)
+      levelButton[i].x = positionX
+      levelButton[i].y = positionY
+      levelButton[i]["image"] = display.newImageRect(items[i]["image"], 50, 50 )
+      levelButton[i]["image"].x = positionX 
+      levelButton[i]["image"].y = positionY - 20
+      useditems = useditems + 1
+      if (useditems % 2 == 0) then
+        positionX = display.contentWidth - 170
+        positionY = positionY + 120
+      else
+        positionX = display.contentWidth - 60
+      end
+      scrollView:insert( levelButton[i] )
+      scrollView:insert( levelButton[i]["image"] )
+    end
+  end
+  return scrollView
+end
+
+function refreshScrollView(filter)
+  local sceneGroup = scene.view
+  scrollView:removeSelf()
+  scrollView = nil
+  scrollView = loadScrollView (filter)
+  sceneGroup:insert( scrollView )
+  catBtn:toFront()
+  dogBtn:toFront()
+  foodBtn:toFront()
+  toysBtn:toFront()
+  allBtn:toFront()
+end
+  
 function scene:create( event )
 
 	local sceneGroup = self.view
 
 	local background = functions.loadBackground()
 	local titleLogo = functions.loadLogo(5)
-		
+		 	
   catBtn = functions.createButtonShop("Cat", onCatBtnRelease)
   catBtn.x = display.contentWidth - 290
   catBtn.y = display.contentHeight - 400
@@ -133,70 +165,12 @@ function scene:create( event )
   toysBtn = functions.createButtonShop("Toys", onToysBtnRelease)
   toysBtn.x = display.contentWidth - 290
   toysBtn.y = display.contentHeight - 190
-
-  item1Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item1Btn.x = display.contentWidth - 170
-  item1Btn.y = display.contentHeight - 420
   
-
-  item2Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item2Btn.x = display.contentWidth - 60
-  item2Btn.y = display.contentHeight - 420
-	
-  item3Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item3Btn.x = display.contentWidth - 170
-  item3Btn.y = display.contentHeight - 290
-
-  item4Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item4Btn.x = display.contentWidth - 60
-  item4Btn.y = display.contentHeight - 290
-
-  item5Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item5Btn.x = display.contentWidth - 170
-  item5Btn.y = display.contentHeight - 170
-
-  item6Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item6Btn.x = display.contentWidth - 60
-  item6Btn.y = display.contentHeight - 170
-  
-
-  item7Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item7Btn.x = display.contentWidth - 170
-  item7Btn.y = display.contentHeight - 50
-	
-  item8Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item8Btn.x = display.contentWidth - 60
-  item8Btn.y = display.contentHeight - 50
-
-  item9Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item9Btn.x = display.contentWidth - 170
-  item9Btn.y = display.contentHeight - -70
-
-  item10Btn = functions.createButtonShopItem("999", onItemBtnRelease)
-  item10Btn.x = display.contentWidth - 60
-  item10Btn.y = display.contentHeight - -70
-
-scrollView = widget.newScrollView(
-    {
-    	backgroundColor = { 0.0, 0.0, 0.0, 0},
-    	horizontalScrollDisabled = true,
-        top = 52,
-        --scrollWidth = 600,
-        --scrollHeight = 490,
-        listener = scrollListener
-    }
-)
-
-scrollView:insert( item1Btn )
-scrollView:insert( item2Btn )
-scrollView:insert( item3Btn )
-scrollView:insert( item4Btn )
-scrollView:insert( item5Btn )
-scrollView:insert( item6Btn )
-scrollView:insert( item7Btn )
-scrollView:insert( item8Btn )
-scrollView:insert( item9Btn )
-scrollView:insert( item10Btn )
+  allBtn = functions.createButtonShop("All", onAllBtnRelease)
+  allBtn.x = display.contentWidth - 290
+  allBtn.y = display.contentHeight - 120
+      
+  scrollView = loadScrollView ("All")
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
@@ -205,11 +179,8 @@ scrollView:insert( item10Btn )
 	sceneGroup:insert( dogBtn )
 	sceneGroup:insert( foodBtn )
 	sceneGroup:insert( toysBtn )
+	sceneGroup:insert( allBtn )
 	
-	--sceneGroup:insert( item2Btn )
-	--sceneGroup:insert( item3Btn )
-	--sceneGroup:insert( item4Btn )
-	--sceneGroup:insert( item5Btn )
 
 end
 
