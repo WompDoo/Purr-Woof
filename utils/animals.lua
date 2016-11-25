@@ -24,6 +24,7 @@ table.insert(animals["cats"], {
   name = "Fatsy", 
   image = "pictures/cat1.png",
   idleanim = "pictures/cat1-anims/cat1-idle.png",
+  walkanim = "pictures/cat1-anims/cat1-walk.png",
   description = "This is a cute, chubby cat"} )
 table.insert(animals["cats"], { 
   id = 5,

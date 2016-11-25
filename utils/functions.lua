@@ -26,16 +26,16 @@ local function createButtonShop(labeltext, functionname)
   }
 end
 
-local function createButtonShopItem(labeltext, functionname)
+local function createButtonShopItem(item, functionname)
   button = widget.newButton{
-    label=labeltext,
+    label=item["name"],
     labelColor = { default={black}, over={black} },
     defaultFile="pictures/item.png",
     width=120, height=120,
     font = "dogfont.ttf",
     fontSize = 28,
     labelYOffset = 33,
-    onRelease = functionname  -- event listener function
+    onRelease = function() return functionname(item) end -- event listener function
   }
   button:addEventListener("touch", onButtonTouch)
   return button

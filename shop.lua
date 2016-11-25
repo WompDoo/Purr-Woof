@@ -11,6 +11,7 @@ local scene = composer.newScene()
 local widget = require "widget"
 local functions = require ("utils.functions")
 local items = require ("utils.items")
+local myData = require("utils.saveddata")
 --------------------------------------------
 
 local function onCatBtnRelease()
@@ -38,15 +39,15 @@ local function onAllBtnRelease()
   return true -- indicates successful touch
 end  
 
-local function onItemBtnRelease()
-  message = "Do You want to buy this?"
+local function onItemBtnRelease(item)
+  message = "Do you want to buy " .. item["name"] .. "?"
   local function onChosenComplete( event )
     if ( event.action == "clicked" ) then
         local i = event.index
         if ( i == 1 ) then
           -- just dismiss this
         elseif ( i == 2 ) then
-          --add something to do with yes
+          table.insert(myData.purchasedItems, item)
         end
     end
   end 
@@ -110,7 +111,7 @@ function loadScrollView (filter)
   local useditems = 0
   for i=1, #items do
     if (items[i]["type"] == filter) or (filter == "All") then 
-      levelButton[i] = functions.createButtonShopItem(items[i]["name"], onItemBtnRelease)
+      levelButton[i] = functions.createButtonShopItem(items[i], onItemBtnRelease)
       levelButton[i].x = positionX
       levelButton[i].y = positionY
       levelButton[i]["image"] = display.newImageRect(items[i]["image"], 50, 50 )
