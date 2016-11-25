@@ -58,7 +58,17 @@ local function loadBackground()
 end
 
 local function loadYardBackground()
-  background = display.newImageRect( "pictures/yardwin.png", display.actualContentWidth, display.actualContentHeight )
+  month = os.date("%m")
+  if (month == "3") or (month == "4") or (month == "5") then
+    backimage = "pictures/yardspr.png"
+  elseif (month == "6") or (month == "7") or (month == "8") then
+    backimage = "pictures/yardsum.png"
+  elseif (month == "9") or (month == "10") or (month == "11") then
+    backimage = "pictures/yardaut.png"
+  else
+    backimage = "pictures/yardwin.png"
+  end
+  background = display.newImageRect( backimage, display.actualContentWidth, display.actualContentHeight )
   background.anchorX = 0
   background.anchorY = 0
   background.x = 0 + display.screenOriginX 
@@ -73,17 +83,30 @@ local function loadLogo(y)
   return titleLogo
 end
 
-local function displayAnimal(image)
-  animal = display.newImageRect( image, 280, 290 )
+local function displayAnimalTinder(image)
+  animal = displayAnimal(image, 280, 290)
   animal.x = display.contentCenterX
   animal.y = 220
+  return animal
+end
+
+local function displayAnimalYard(image)
+  animal = displayAnimal(image, 280, 290)
+  animal.x = display.contentCenterX
+  animal.y = display.actualContentHeight - (animal.height*0.5)
+  return animal
+end
+
+local function displayAnimal(image, x, y)
+  animal = display.newImageRect( image, x, y )
   return animal
 end
 
 functionbag.createButton = createButton
 functionbag.createButtonShop = createButtonShop
 functionbag.createButtonShopItem = createButtonShopItem
-functionbag.displayAnimal = displayAnimal
+functionbag.displayAnimalTinder = displayAnimalTinder
+functionbag.displayAnimalYard = displayAnimalYard
 functionbag.loadBackground = loadBackground
 functionbag.loadYardBackground = loadYardBackground
 functionbag.loadLogo = loadLogo
