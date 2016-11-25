@@ -83,32 +83,42 @@ local function loadLogo(y)
   return titleLogo
 end
 
-local function displayAnimalTinder(image)
-  animal = displayAnimal(image, 280, 290)
+local function displayAnimal(image)
+  animal = display.newImageRect(image, 280, 290)
   animal.x = display.contentCenterX
   animal.y = 220
   return animal
 end
 
-local function displayAnimalYard(image)
-  animal = displayAnimal(image, 280, 290)
-  animal.x = display.contentCenterX
-  animal.y = display.actualContentHeight - (animal.height*0.5)
-  return animal
-end
-
-local function displayAnimal(image, x, y)
-  animal = display.newImageRect( image, x, y )
-  return animal
+local function animateAnimal(image)
+  local sheetOptions =
+  {
+    width = 512,
+    height = 256,
+    numFrames = 4
+  }
+  local imageSheet = graphics.newImageSheet( image, sheetOptions )
+  local sequencesAnimation = {
+    -- consecutive frames sequence
+    {
+        name = "animation",
+        start = 1,
+        count = 4,
+        time = 1200,
+        loopCount = 0,
+        loopDirection = "forward"
+    }
+  }
+  return display.newSprite( imageSheet, sequencesAnimation )
 end
 
 functionbag.createButton = createButton
 functionbag.createButtonShop = createButtonShop
 functionbag.createButtonShopItem = createButtonShopItem
-functionbag.displayAnimalTinder = displayAnimalTinder
-functionbag.displayAnimalYard = displayAnimalYard
+functionbag.displayAnimal = displayAnimal
 functionbag.loadBackground = loadBackground
 functionbag.loadYardBackground = loadYardBackground
 functionbag.loadLogo = loadLogo
+functionbag.animateAnimal = animateAnimal
 
 return functionbag

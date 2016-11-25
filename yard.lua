@@ -11,12 +11,16 @@ local sceneGroup = self.view
 local background = functions.loadYardBackground()
 
 if myData.chosenAnimal then
-  local animal = functions.displayAnimalYard(myData.chosenAnimal["yardimage"])
+  animal = functions.animateAnimal(myData.chosenAnimal["idleanim"])
+  animal.x = display.contentCenterX
+  animal.y = display.actualContentHeight - (animal.height*0.5)
+  animal:scale(0.5, 0.5)
 end
 
 sceneGroup:insert( background )
 if animal then
   sceneGroup:insert( animal )
+  animal:play()
 end
 
 end
