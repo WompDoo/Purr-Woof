@@ -16,7 +16,8 @@ table.insert(animals["dogs"], {
   id = 3,
   name = "Rolof", 
   image = "pictures/husky.png",  
-  idleanim = "pictures/husky-anims/huskymation.png",
+  idleanim = "pictures/husky-anims/husky-idle.png",
+  walkanim = "pictures/husky-anims/husky-walking.png",
   description = "The only dog who hired a professional photographer. Also a viking."} )
 
 table.insert(animals["cats"], { 
