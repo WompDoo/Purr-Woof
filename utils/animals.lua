@@ -31,13 +31,15 @@ table.insert(animals["cats"], {
   id = 5,
   name = "El Gato", 
   image = "pictures/cat2.png",
-  idleanim = "",  
+  idleanim = "",
+  walkanim = "pictures/cat2-anims/cat2-walk.png",  
   description = "This is a swashbuckling Southern cat"} )
 table.insert(animals["cats"], { 
   id = 6,
   name = "Fancy Cat", 
   image = "pictures/cat3.png", 
-  idleanim = "", 
+  idleanim = "",
+  walkanim = "pictures/cat3-anims/cat3-walk.png",
   description = "This is a very fancy cat"} )
 
 return animals
