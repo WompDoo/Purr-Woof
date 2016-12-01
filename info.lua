@@ -25,7 +25,7 @@ function scene:create( event )
 
 	local nameoptions = 
     {
-        text = event.params.animal["name"],
+        text = event.params.forAnimal["name"],
         x = display.contentCenterX,
         y = 170,
         width = display.contentWidth * 0.65,
@@ -37,7 +37,7 @@ function scene:create( event )
   
 	local descriptionoptions = 
     {
-        text = event.params.animal["description"],
+        text = event.params.forAnimal["description"],
         x = display.contentCenterX,
         y = 210,
         width = display.contentWidth * 0.65,
