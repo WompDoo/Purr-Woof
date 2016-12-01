@@ -60,13 +60,13 @@ end
 local function loadYardBackground()
   month = os.date("%m")
   if (month == "3") or (month == "4") or (month == "5") then
-    backimage = "pictures/yardspr.png"
+    backimage = "pictures/yard/spring.png"
   elseif (month == "6") or (month == "7") or (month == "8") then
-    backimage = "pictures/yardsum.png"
+    backimage = "pictures/yard/summer.png"
   elseif (month == "9") or (month == "10") or (month == "11") then
-    backimage = "pictures/yardaut.png"
+    backimage = "pictures/yard/autumn.png"
   else
-    backimage = "pictures/yardwin.png"
+    backimage = "pictures/yard/winter.png"
   end
   background = display.newImageRect( backimage, display.actualContentWidth, display.actualContentHeight )
   background.anchorX = 0
