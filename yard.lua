@@ -5,10 +5,26 @@ local myData = require( "utils.saveddata" )
 
 local scene = composer.newScene()
 
+function onButtonTouch( event )
+    if ( event.phase == "began" ) then
+    elseif ( event.phase == "moved" ) then
+      local dy = math.abs(event.y - event.yStart)
+      local dx = math.abs(event.x - event.xStart)
+
+      if dy > 5 or dx > 5 then
+        native.showAlert( "Petted", "Your animal looks happy")
+      end
+    elseif ( event.phase == "ended" ) then
+    end
+    return true
+end
+
 function scene:create( event )
 local sceneGroup = self.view
 
 local background = functions.loadYardBackground()
+
+local animal = nil
 
 if myData.chosenAnimal then
   chance = math.random()
@@ -20,6 +36,7 @@ if myData.chosenAnimal then
   animal.x = display.contentCenterX
   animal.y = display.actualContentHeight - (animal.height*0.5)
   animal:scale(0.5, 0.5)
+  animal:addEventListener("touch", onButtonTouch)
 end
 
 sceneGroup:insert( background )
