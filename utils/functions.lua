@@ -124,8 +124,8 @@ local function animateAnimal(image)
     {
         name = "animation",
         start = 1,
-        count = 4,
-        time = 1500,
+        count = 3,
+        time = 700,
         loopCount = 0,
         loopDirection = "forward"
     }
