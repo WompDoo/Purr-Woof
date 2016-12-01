@@ -100,7 +100,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 
   local background = functions.loadBackground()
-  local titleLogo = functions.loadLogo(25)
+  local titleLogo = functions.loadLogo(25, "catornot")
 	
 	nextcat = 1
   cat = functions.displayAnimal( cats[nextcat]["image"] )
