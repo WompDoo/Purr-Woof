@@ -31,9 +31,9 @@ local function createButtonShopItem(item, functionname)
     label=item["name"],
     labelColor = { default={black}, over={black} },
     defaultFile="pictures/item.png",
-    width=120, height=120,
+    width=130, height=120,
     font = "dogfont.ttf",
-    fontSize = 28,
+    fontSize = 24,
     labelYOffset = 33,
     onRelease = function() return functionname(item) end -- event listener function
   }

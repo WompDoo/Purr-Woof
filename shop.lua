@@ -15,27 +15,27 @@ local myData = require("utils.saveddata")
 --------------------------------------------
 
 local function onCatBtnRelease()
-  refreshScrollView("Cat")
+  refreshScrollView("cat")
   return true -- indicates successful touch
 end  
 
 local function onFoodBtnRelease()
-  refreshScrollView("Food")
+  refreshScrollView("food")
   return true -- indicates successful touch
 end  
 
 local function onToysBtnRelease()
-  refreshScrollView("Toy")
+  refreshScrollView("toy")
   return true -- indicates successful touch
 end  
 
 local function onDogBtnRelease()
-  refreshScrollView("Dog")  
+  refreshScrollView("dog")  
   return true -- indicates successful touch
 end  
 
 local function onAllBtnRelease()
-  refreshScrollView("All")  
+  refreshScrollView("all")  
   return true -- indicates successful touch
 end  
 
@@ -110,7 +110,7 @@ function loadScrollView (filter)
   local positionY = display.contentHeight - 410
   local useditems = 0
   for i=1, #items do
-    if (items[i]["type"] == filter) or (filter == "All") then 
+    if (items[i]["type"][filter]) or (filter == "all") then 
       levelButton[i] = functions.createButtonShopItem(items[i], onItemBtnRelease)
       levelButton[i].x = positionX
       levelButton[i].y = positionY
@@ -171,7 +171,7 @@ function scene:create( event )
   allBtn.x = display.contentWidth - 290
   allBtn.y = display.contentHeight - 120
       
-  scrollView = loadScrollView ("All")
+  scrollView = loadScrollView ("all")
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
