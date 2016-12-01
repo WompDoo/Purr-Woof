@@ -150,6 +150,17 @@ function scene:create( event )
 
 	local background = functions.loadBackground()
 	local titleLogo = functions.loadLogo(5)
+
+  local moneycounter = widget.newButton{
+    defaultFile="pictures/coin.png",
+    label=myData.availableMoney,
+    labelColor = { default={black}, over={black} },
+    font = "dogfont.ttf",
+    fontSize = 28,
+    width=40, height=40
+  }
+  moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
+  moneycounter.y = 0
 		 	
   catBtn = functions.createButtonShop("Cat", onCatBtnRelease)
   catBtn.x = display.contentWidth - 290
@@ -175,6 +186,7 @@ function scene:create( event )
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
+	sceneGroup:insert (moneycounter)
 	sceneGroup:insert( scrollView )
 	sceneGroup:insert( catBtn )
 	sceneGroup:insert( dogBtn )

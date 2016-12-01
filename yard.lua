@@ -1,22 +1,34 @@
 
 local composer = require( "composer" )
+local widget = require "widget"
 local functions = require( "utils.functions" )
 local myData = require( "utils.saveddata" )
 
 local scene = composer.newScene()
 
-function onButtonTouch( event )
+local function onButtonTouch( event )
     if ( event.phase == "began" ) then
     elseif ( event.phase == "moved" ) then
       local dy = math.abs(event.y - event.yStart)
       local dx = math.abs(event.x - event.xStart)
 
       if dy > 5 or dx > 5 then
-        native.showAlert( "Petted", "Your animal looks happy")
+        animal:removeEventListener("touch", onButtonTouch) 
+        local coin = display.newImageRect( "pictures/coin.png", 60, 60 )
+        coin.x = display.contentCenterX
+        coin.y = animal.y - (animal.height*0.3)
+        transition.moveTo( coin, { x=coin.x, y=coin.y - 100, time=450, onComplete = function(obj) animal:addEventListener("touch", onButtonTouch) obj:removeSelf() end } )
+        myData.availableMoney = myData.availableMoney + 5
+        moneycounter:setLabel(myData.availableMoney)
       end
     elseif ( event.phase == "ended" ) then
     end
     return true
+end
+
+local function onCounterRelease()
+  composer.gotoScene( "shop", "fade", 500)
+  return true -- indicates successful touch
 end
 
 function scene:create( event )
@@ -24,7 +36,7 @@ local sceneGroup = self.view
 
 local background = functions.loadYardBackground()
 
-local animal = nil
+animal = nil
 
 if myData.chosenAnimal then
   chance = math.random()
@@ -39,7 +51,20 @@ if myData.chosenAnimal then
   animal:addEventListener("touch", onButtonTouch)
 end
 
+moneycounter = widget.newButton{
+    defaultFile="pictures/coin.png",
+    label=myData.availableMoney,
+    labelColor = { default={black}, over={black} },
+    width=40, height=40,
+    font = "dogfont.ttf",
+    fontSize = 28,
+    onRelease = onCounterRelease
+  }
+  moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
+  moneycounter.y = 0
+  
 sceneGroup:insert( background )
+sceneGroup:insert( moneycounter )
 if animal then
   sceneGroup:insert( animal )
   animal:play()
