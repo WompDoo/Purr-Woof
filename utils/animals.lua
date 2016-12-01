@@ -2,46 +2,34 @@ local animals = { dogs = {}, cats = {} }
 
 table.insert(animals["dogs"], { 
   id = 1,
+  baseurl = "pictures/animals/ddoggy/",
   name = "D-Doggy", 
-  image = "pictures/dog1.png",
-  idleanim = "", 
-  walkanim = "",  
   description = "This is a cute doggy with a D"} )
 table.insert(animals["dogs"], { 
   id = 2,
+  baseurl = "pictures/animals/doggy/",
   name = "Doggy", 
-  image = "pictures/dog2.png",
-  idleanim = "",  
-  walkanim = "",  
   description = "This is a cute doggy without a D"} )
 table.insert(animals["dogs"], { 
   id = 3,
-  name = "Rolof", 
-  image = "pictures/husky.png",  
-  idleanim = "pictures/husky-anims/husky-idle.png",
-  walkanim = "pictures/husky-anims/husky-walking.png",
+  baseurl = "pictures/animals/rolof/",
+  name = "Rolof",
   description = "The only dog who hired a professional photographer. Also a viking."} )
 
 table.insert(animals["cats"], { 
   id = 4,
-  name = "Fatsy", 
-  image = "pictures/cat1.png",
-  idleanim = "pictures/cat1-anims/cat1-idle.png",
-  walkanim = "pictures/cat1-anims/cat1-walk.png",
+  baseurl = "pictures/animals/fatsy/",
+  name = "Fatsy",
   description = "This is a cute, chubby cat"} )
 table.insert(animals["cats"], { 
   id = 5,
-  name = "El Gato", 
-  image = "pictures/cat2.png",
-  idleanim = "",
-  walkanim = "pictures/cat2-anims/cat2-walk.png",  
+  baseurl = "pictures/animals/elgato/",
+  name = "El Gato",  
   description = "This is a swashbuckling Southern cat"} )
 table.insert(animals["cats"], { 
   id = 6,
+  baseurl = "pictures/animals/fancycat/",
   name = "Fancy Cat", 
-  image = "pictures/cat3.png", 
-  idleanim = "",
-  walkanim = "pictures/cat3-anims/cat3-walk.png",
   description = "This is a very fancy cat"} )
 
 return animals
