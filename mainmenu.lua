@@ -38,6 +38,12 @@ local function onTubBtnRelease()
   return true -- indicates successful touch
 end
 
+local function onChooseBtnRelease()
+  composer.gotoScene( "menu2", "fade", 500)
+  composer.removeScene("mainmenu")
+  return true -- indicates successful touch
+end
+
 function scene:create( event )
 	local sceneGroup = self.view
 
@@ -47,7 +53,7 @@ function scene:create( event )
   local nameoptions = 
       {
           x = display.contentCenterX,
-          y = display.contentHeight - 50,
+          y = display.contentHeight - 65,
           width = display.contentWidth * 0.8,
           font = "dogfont.ttf",
           fontSize = 24
@@ -90,6 +96,13 @@ function scene:create( event )
 	sceneGroup:insert( cameraBtn )
 	sceneGroup:insert( tubBtn )
 	sceneGroup:insert( name )
+	
+	if not myData.chosenAnimal then
+  	chooseBtn = functions.createButton("Choose!", onChooseBtnRelease)
+    chooseBtn.x = display.contentCenterX
+    chooseBtn.y = display.contentHeight - 20
+	  sceneGroup:insert( chooseBtn )
+	end
 end
 
 function scene:show( event )

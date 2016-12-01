@@ -179,10 +179,10 @@ function scene:create( event )
     labelColor = { default={black}, over={black} },
     font = "dogfont.ttf",
     fontSize = 28,
-    width=40, height=40
+    width=60, height=60
   }
   moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
-  moneycounter.y = 0
+  moneycounter.y = 10
 
   local backBtn = functions.createButtonBack()
   		 	

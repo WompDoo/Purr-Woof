@@ -55,13 +55,13 @@ moneycounter = widget.newButton{
     defaultFile="pictures/coin.png",
     label=myData.availableMoney,
     labelColor = { default={black}, over={black} },
-    width=40, height=40,
+    width=60, height=60,
     font = "dogfont.ttf",
     fontSize = 28,
     onRelease = onCounterRelease
   }
   moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
-  moneycounter.y = 0
+  moneycounter.y = 10
   
 local backBtn = functions.createButtonBack()
 
