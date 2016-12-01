@@ -163,6 +163,7 @@ function refreshScrollView(filter)
   foodBtn:toFront()
   toysBtn:toFront()
   allBtn:toFront()
+  backBtn:toFront()
 end
   
 function scene:create( event )
@@ -182,7 +183,9 @@ function scene:create( event )
   }
   moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
   moneycounter.y = 0
-		 	
+
+  local backBtn = functions.createButtonBack()
+  		 	
   catBtn = functions.createButtonShop("Cat", onCatBtnRelease)
   catBtn.x = display.contentWidth - 290
   catBtn.y = display.contentHeight - 400
@@ -214,6 +217,7 @@ function scene:create( event )
 	sceneGroup:insert( foodBtn )
 	sceneGroup:insert( toysBtn )
 	sceneGroup:insert( allBtn )
+	sceneGroup:insert( backBtn )
 	
 
 end

@@ -63,8 +63,11 @@ moneycounter = widget.newButton{
   moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
   moneycounter.y = 0
   
+local backBtn = functions.createButtonBack()
+
 sceneGroup:insert( background )
 sceneGroup:insert( moneycounter )
+sceneGroup:insert( backBtn )
 if animal then
   sceneGroup:insert( animal )
   animal:play()

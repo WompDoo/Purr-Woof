@@ -1,4 +1,5 @@
 local widget = require "widget"
+local composer = require( "composer" )
 
 local functionbag = {}
 
@@ -14,6 +15,19 @@ local function createButton(labeltext, functionname)
   }
 end
 
+local function createButtonBack()
+  local button = widget.newButton{
+    label="☰",
+    labelColor = { default={black}, over={black} },
+    width=40, height=40,
+    fontSize = 30,
+    onRelease = function() return composer.gotoScene( "mainmenu" ) end
+  }
+  button.x = (button.width*0.5)
+  button.y = 0
+  return button
+end
+  
 local function createButtonShop(labeltext, functionname)
   return widget.newButton{
     label=labeltext,
@@ -127,5 +141,6 @@ functionbag.loadBackground = loadBackground
 functionbag.loadYardBackground = loadYardBackground
 functionbag.loadLogo = loadLogo
 functionbag.animateAnimal = animateAnimal
+functionbag.createButtonBack = createButtonBack
 
 return functionbag
