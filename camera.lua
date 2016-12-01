@@ -5,7 +5,7 @@ local functions = require( "utils.functions" )
 local scene = composer.newScene()
 
 local function captureScreen()
-    local capture = display.captureScreen( true )
+  display.save( sceneGroup, { filename= os.date("%Y%m%d%H%M%S") .. "_yard.png", baseDir=system.DocumentsDirectory, captureOffscreenArea=true, backgroundColor={0,0,0,0} } )
 	local alert = native.showAlert( "Success", "Screen Capture Saved to Library", { "OK" } )
 
 end
@@ -17,12 +17,12 @@ local sceneGroup = self.view
 
 local background = functions.loadYardBackground()
 
-shopBtn = functions.createButton("Camera", captureScreen)
-shopBtn.x = display.contentCenterX
-shopBtn.y = display.contentHeight - 290
+cameraBtn = functions.createButton("Camera", captureScreen)
+cameraBtn.x = display.contentCenterX
+cameraBtn.y = display.contentHeight - 290
 
 sceneGroup:insert( background )
-sceneGroup:insert( shopBtn )
+sceneGroup:insert( cameraBtn )
 
 end
 
