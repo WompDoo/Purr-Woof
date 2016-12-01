@@ -5,12 +5,14 @@ table.insert(animals["dogs"], {
   name = "D-Doggy", 
   image = "pictures/dog1.png",
   idleanim = "", 
+  walkanim = "",  
   description = "This is a cute doggy with a D"} )
 table.insert(animals["dogs"], { 
   id = 2,
   name = "Doggy", 
   image = "pictures/dog2.png",
   idleanim = "",  
+  walkanim = "",  
   description = "This is a cute doggy without a D"} )
 table.insert(animals["dogs"], { 
   id = 3,
