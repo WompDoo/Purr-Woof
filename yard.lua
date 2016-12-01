@@ -31,6 +31,12 @@ local function onCounterRelease()
   return true -- indicates successful touch
 end
 
+local function onBackBtnRelease()
+  composer.gotoScene("mainmenu") 
+  composer.removeScene("yard")  
+  return true -- indicates successful touch
+end  
+
 function scene:create( event )
 local sceneGroup = self.view
 
@@ -63,7 +69,7 @@ moneycounter = widget.newButton{
   moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
   moneycounter.y = 10
   
-local backBtn = functions.createButtonBack()
+local backBtn = functions.createButtonBack(onBackBtnRelease)
 
 sceneGroup:insert( background )
 sceneGroup:insert( moneycounter )

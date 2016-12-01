@@ -39,6 +39,12 @@ local function onAllBtnRelease()
   return true -- indicates successful touch
 end  
 
+local function onBackBtnRelease()
+  composer.gotoScene("mainmenu") 
+  composer.removeScene("shop")  
+  return true -- indicates successful touch
+end  
+
 local function onItemBtnRelease(item)
   message = "Do you want to buy " .. item["name"] .. "?"
   local function onChosenComplete( event )
@@ -184,7 +190,7 @@ function scene:create( event )
   moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
   moneycounter.y = 10
 
-  local backBtn = functions.createButtonBack()
+  backBtn = functions.createButtonBack(onBackBtnRelease)
   		 	
   catBtn = functions.createButtonShop("Cat", onCatBtnRelease)
   catBtn.x = display.contentWidth - 290

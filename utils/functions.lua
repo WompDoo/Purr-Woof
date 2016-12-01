@@ -15,13 +15,13 @@ local function createButton(labeltext, functionname)
   }
 end
 
-local function createButtonBack()
+local function createButtonBack(functionname)
   local button = widget.newButton{
     label="☰",
     labelColor = { default={black}, over={black} },
     width=60, height=60,
     fontSize = 30,
-    onRelease = function() return composer.gotoScene( "mainmenu" ) end
+    onRelease = functionname
   }
   button.x = (button.width*0.5)
   button.y = 10
