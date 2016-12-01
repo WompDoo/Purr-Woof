@@ -76,8 +76,15 @@ local function loadYardBackground()
   return background
 end
 
-local function loadLogo(y)
-  titleLogo = display.newImageRect( "pictures/logo.png", 264, 42 )
+local function loadLogo(y, type)
+  if (type == "dogster") then 
+    picture = "pictures/logos/dogster.png"
+  elseif (type == "catornot") then  
+    picture = "pictures/logos/catornot.png"
+  else
+    picture = "pictures/logos/mainlogo.png"
+  end
+  titleLogo = display.newImageRect( picture, 264, 42 )
   titleLogo.x = display.contentCenterX
   titleLogo.y = y
   return titleLogo

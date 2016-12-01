@@ -100,7 +100,7 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	local background = functions.loadBackground()
-	local titleLogo = functions.loadLogo(25)
+	local titleLogo = functions.loadLogo(25, "dogster")
 	
 	nextdog = 1
 	dog = functions.displayAnimal( dogs[nextdog]["image"] )
