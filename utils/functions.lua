@@ -19,12 +19,12 @@ local function createButtonBack()
   local button = widget.newButton{
     label="☰",
     labelColor = { default={black}, over={black} },
-    width=40, height=40,
+    width=60, height=60,
     fontSize = 30,
     onRelease = function() return composer.gotoScene( "mainmenu" ) end
   }
   button.x = (button.width*0.5)
-  button.y = 0
+  button.y = 10
   return button
 end
   
@@ -124,8 +124,8 @@ local function animateAnimal(image)
     {
         name = "animation",
         start = 1,
-        count = 4,
-        time = 1500,
+        count = 3,
+        time = 700,
         loopCount = 0,
         loopDirection = "forward"
     }
