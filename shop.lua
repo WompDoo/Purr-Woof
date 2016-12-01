@@ -47,7 +47,13 @@ local function onItemBtnRelease(item)
         if ( i == 1 ) then
           -- just dismiss this
         elseif ( i == 2 ) then
-          table.insert(myData.purchasedItems, item)
+          if myData.availableMoney >= item.price then 
+            myData.availableMoney = myData.availableMoney - item.price
+            moneycounter:setLabel(myData.availableMoney)
+            table.insert(myData.purchasedItems, item)
+          else
+            native.showAlert( "Nope!", "You don't have enough money!", { "Whoops!" })
+          end
         end
     end
   end 
@@ -117,6 +123,19 @@ function loadScrollView (filter)
       levelButton[i]["image"] = display.newImageRect(items[i]["image"], 50, 50 )
       levelButton[i]["image"].x = positionX 
       levelButton[i]["image"].y = positionY - 20
+      levelButton[i]["coin"] = display.newImageRect("pictures/coin.png", 40, 40 )
+      levelButton[i]["coin"].x = positionX + 25
+      levelButton[i]["coin"].y = positionY + 10
+      local priceoptions = 
+      {
+        text = items[i]["price"],
+        x = levelButton[i]["coin"].x,
+        y = levelButton[i]["coin"].y,
+        font = "dogfont.ttf",
+        fontSize = 24
+      }
+      levelButton[i]["price"] = display.newText( priceoptions )
+      levelButton[i]["price"]:setFillColor(0, 0, 0)
       useditems = useditems + 1
       if (useditems % 2 == 0) then
         positionX = display.contentWidth - 170
@@ -126,6 +145,8 @@ function loadScrollView (filter)
       end
       scrollView:insert( levelButton[i] )
       scrollView:insert( levelButton[i]["image"] )
+      scrollView:insert( levelButton[i]["coin"] )
+      scrollView:insert( levelButton[i]["price"] )
     end
   end
   return scrollView
@@ -142,6 +163,7 @@ function refreshScrollView(filter)
   foodBtn:toFront()
   toysBtn:toFront()
   allBtn:toFront()
+  backBtn:toFront()
 end
   
 function scene:create( event )
@@ -150,7 +172,20 @@ function scene:create( event )
 
 	local background = functions.loadBackground()
 	local titleLogo = functions.loadLogo(5)
-		 	
+
+  moneycounter = widget.newButton{
+    defaultFile="pictures/coin.png",
+    label=myData.availableMoney,
+    labelColor = { default={black}, over={black} },
+    font = "dogfont.ttf",
+    fontSize = 28,
+    width=40, height=40
+  }
+  moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
+  moneycounter.y = 0
+
+  local backBtn = functions.createButtonBack()
+  		 	
   catBtn = functions.createButtonShop("Cat", onCatBtnRelease)
   catBtn.x = display.contentWidth - 290
   catBtn.y = display.contentHeight - 400
@@ -175,12 +210,14 @@ function scene:create( event )
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
+	sceneGroup:insert (moneycounter)
 	sceneGroup:insert( scrollView )
 	sceneGroup:insert( catBtn )
 	sceneGroup:insert( dogBtn )
 	sceneGroup:insert( foodBtn )
 	sceneGroup:insert( toysBtn )
 	sceneGroup:insert( allBtn )
+	sceneGroup:insert( backBtn )
 	
 
 end

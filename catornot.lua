@@ -21,7 +21,7 @@ local function onInfoBtnRelease()
     isModal = true,
     effect = "slideDown",
     params = {
-        animal = cats[nextcat]
+        forAnimal = cats[nextcat]
     }
   }
   composer.showOverlay("info", infooptions)
