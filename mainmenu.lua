@@ -76,25 +76,25 @@ function scene:create( event )
   shopBtn.x = display.contentCenterX
   shopBtn.y = display.contentHeight - 290
   
-  gamesBtn = functions.createButton("Games", onGamesBtnRelease)
-  gamesBtn.x = display.contentCenterX
-  gamesBtn.y = display.contentHeight - 230
+ -- gamesBtn = functions.createButton("Games", onGamesBtnRelease)
+ -- gamesBtn.x = display.contentCenterX
+  --gamesBtn.y = display.contentHeight - 230
   
-  cameraBtn = functions.createButton("Camera", onCameraBtnRelease)
-  cameraBtn.x = display.contentCenterX
-  cameraBtn.y = display.contentHeight - 170
+  ---cameraBtn = functions.createButton("Camera", onCameraBtnRelease)
+  --cameraBtn.x = display.contentCenterX
+ -- cameraBtn.y = display.contentHeight - 170
   
   roomBtn = functions.createButton("Room", onRoomBtnRelease)
   roomBtn.x = display.contentCenterX
-  roomBtn.y = display.contentHeight - 110
+  roomBtn.y = display.contentHeight - 230
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
 	sceneGroup:insert( roomBtn )
 	sceneGroup:insert( yardBtn )
 	sceneGroup:insert( shopBtn )
-	sceneGroup:insert( gamesBtn )
-	sceneGroup:insert( cameraBtn )
+	--sceneGroup:insert( gamesBtn )
+	--sceneGroup:insert( cameraBtn )
 	sceneGroup:insert( name )
 	
 	if not myData.chosenAnimal then
