@@ -59,8 +59,17 @@ if myData.chosenAnimal then
   else
     physics = require("physics");
     physics.start()
+    left = display.newLine(0, 0, 0, display.actualContentHeight)
+    left.isVisible = false
+    right = display.newLine(display.contentWidth, 0, display.contentWidth, display.actualContentHeight)
+    right.isVisible = false
+    bottom = display.newLine(0, display.actualContentHeight, display.contentWidth, display.actualContentHeight)
+    bottom.isVisible = false
     animal = functions.animateAnimal(myData.chosenAnimal["baseurl"] .. "walkanim.png")
     physics.addBody(animal, "kinematic", {isSensor = true})
+    physics.addBody(left, 'static', { bounce = 0.1})
+    physics.addBody(right, 'static', { bounce = 0.1})
+    physics.addBody(bottom, 'static', { bounce = 0.1})
     function moveRandomly()
       randomx = math.random(-100,100);
       animal:setLinearVelocity(randomx, math.random(-100,100));
@@ -71,6 +80,7 @@ if myData.chosenAnimal then
         animal.xScale = 0.5
         animal.yScale = 0.5      
       end
+
     end
     animalTimer = timer.performWithDelay(1000, moveRandomly, -1);
   end
