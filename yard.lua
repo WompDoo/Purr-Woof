@@ -27,13 +27,21 @@ local function onButtonTouch( event )
 end
 
 local function onCounterRelease()
-  composer.gotoScene( "shop", "fade", 500)
+  composer.gotoScene( "shop")
+  composer.removeScene("yard")
+  if animalTimer then 
+    timer.cancel(animalTimer)
+  end
   return true -- indicates successful touch
 end
 
 local function onBackBtnRelease()
   composer.gotoScene("mainmenu") 
-  composer.removeScene("yard")  
+  composer.removeScene("yard")
+  if animalTimer then 
+    timer.cancel(animalTimer)
+  end
+
   return true -- indicates successful touch
 end  
 
@@ -49,13 +57,29 @@ if myData.chosenAnimal then
   if chance > 0.5 then 
     animal = functions.animateAnimal(myData.chosenAnimal["baseurl"] .. "idleanim.png")
   else
+    physics = require("physics");
+    physics.start()
     animal = functions.animateAnimal(myData.chosenAnimal["baseurl"] .. "walkanim.png")
+    physics.addBody(animal, "kinematic", {isSensor = true})
+    function moveRandomly()
+      randomx = math.random(-100,100);
+      animal:setLinearVelocity(randomx, math.random(-100,100));
+      if randomx > 0 then
+        animal.xScale = -0.5
+        animal.yScale = 0.5
+      else
+        animal.xScale = 0.5
+        animal.yScale = 0.5      
+      end
+    end
+    animalTimer = timer.performWithDelay(1000, moveRandomly, -1);
   end
   animal.x = display.contentCenterX
   animal.y = display.actualContentHeight - (animal.height*0.5)
   animal:scale(0.5, 0.5)
   animal:addEventListener("touch", onButtonTouch)
 end
+
 
 moneycounter = widget.newButton{
     defaultFile="pictures/coin.png",
