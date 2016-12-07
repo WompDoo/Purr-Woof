@@ -41,7 +41,7 @@ local function onHotBtnRelease()
           -- just dismiss this
         elseif ( i == 2 ) then
         	myData.chosenAnimal = dogs[nextdog]
-        	composer.gotoScene( "mainmenu" )
+        	composer.gotoScene( "room" )
         	composer.removeScene( "dogster" )
         end
     end

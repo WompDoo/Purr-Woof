@@ -33,8 +33,8 @@ local function onCameraBtnRelease()
   return true -- indicates successful touch
 end
 
-local function onTubBtnRelease()
-  composer.gotoScene( "tub", "fade", 500)
+local function onRoomBtnRelease()
+  composer.gotoScene( "room", "fade", 500)
   return true -- indicates successful touch
 end
 
@@ -84,17 +84,17 @@ function scene:create( event )
   cameraBtn.x = display.contentCenterX
   cameraBtn.y = display.contentHeight - 170
   
-  tubBtn = functions.createButton("Tub", onTubBtnRelease)
-  tubBtn.x = display.contentCenterX
-  tubBtn.y = display.contentHeight - 110
+  roomBtn = functions.createButton("Room", onRoomBtnRelease)
+  roomBtn.x = display.contentCenterX
+  roomBtn.y = display.contentHeight - 110
   
 	sceneGroup:insert( background )
 	sceneGroup:insert( titleLogo )
+	sceneGroup:insert( roomBtn )
 	sceneGroup:insert( yardBtn )
 	sceneGroup:insert( shopBtn )
 	sceneGroup:insert( gamesBtn )
 	sceneGroup:insert( cameraBtn )
-	sceneGroup:insert( tubBtn )
 	sceneGroup:insert( name )
 	
 	if not myData.chosenAnimal then
