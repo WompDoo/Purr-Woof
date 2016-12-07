@@ -71,6 +71,15 @@ local function loadBackground()
   return background
 end
 
+local function loadRoomBackground()
+  background = display.newImageRect( "pictures/room/room.png", display.actualContentWidth, display.actualContentHeight )
+  background.anchorX = 0
+  background.anchorY = 0
+  background.x = 0 + display.screenOriginX 
+  background.y = 0 + display.screenOriginY
+  return background
+end
+
 local function loadYardBackground()
   month = os.date("%m")
   if (month == "3") or (month == "4") or (month == "5") then
@@ -138,6 +147,7 @@ functionbag.createButtonShop = createButtonShop
 functionbag.createButtonShopItem = createButtonShopItem
 functionbag.displayAnimal = displayAnimal
 functionbag.loadBackground = loadBackground
+functionbag.loadRoomBackground = loadRoomBackground
 functionbag.loadYardBackground = loadYardBackground
 functionbag.loadLogo = loadLogo
 functionbag.animateAnimal = animateAnimal
