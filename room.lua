@@ -49,7 +49,7 @@ if myData.chosenAnimal then
   if chance > 0.5 then 
     animal = functions.animateAnimal(myData.chosenAnimal["baseurl"] .. "idleanim.png")
   else
-    animal = functions.animateAnimal(myData.chosenAnimal["baseurl"] .. "walkanim.png")
+    animal = functions.animateAnimal(myData.chosenAnimal["baseurl"] .. "sleepanim.png")
   end
   animal.x = display.contentCenterX
   animal.y = display.actualContentHeight - (animal.height*0.5)
