@@ -49,10 +49,19 @@ local function load_saved_state()
         -- Read data from file
         local contents = file:read( "*a" )
         local savestatedata = json.decode(contents)
+        if savestatedata.chosenAnimal then 
+          myData.chosenAnimal = savestatedata.chosenAnimal
+        end
+        if savestatedata.availableMoney then 
+          myData.availableMoney = savestatedata.availableMoney
+        end
+        if savestatedata.purchasedItems then 
+          myData.purchasedItems =  savestatedata.purchasedItems
+        end
         -- Close the file handle
         io.close( file )
         file = nil
-        return savestatedata
+        
     end
 end
 
@@ -63,16 +72,8 @@ local function onSystemEvent( event )
       save_state()
  
    elseif ( event.type == "applicationStart" ) then
-      local savestatedata = load_saved_state()
-      if savestatedata.chosenAnimal then 
-        myData.chosenAnimal = savestatedata.chosenAnimal
-      end
-      if savestatedata.availableMoney then 
-        myData.availableMoney = savestatedata.availableMoney
-      end
-      if savestatedata.purchasedItems then 
-        myData.purchasedItems =  savestatedata.purchasedItems
-      end
+      load_saved_state()
+      
  
    end
 end
