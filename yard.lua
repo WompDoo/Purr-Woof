@@ -6,6 +6,14 @@ local myData = require( "utils.saveddata" )
 
 local scene = composer.newScene()
 
+local function captureScreen()
+  local screenshot = display.captureScreen(true)  
+  --display.save( screenshot, { filename= os.date("%Y%m%d%H%M%S") .. "_yard.png", captureOffscreenArea=true, backgroundColor={0,0,0,0} } )
+  screenshot:removeSelf()
+  local alert = native.showAlert( "Success", "Screen Capture Saved to Library", { "OK" } )
+
+end
+
 local function onButtonTouch( event )
     if ( event.phase == "began" ) then
     elseif ( event.phase == "moved" ) then
@@ -90,6 +98,17 @@ if myData.chosenAnimal then
   animal:addEventListener("touch", onButtonTouch)
 end
 
+cameraBtn = widget.newButton{
+    defaultFile="pictures/camera.png",
+    label=Pct,
+    labelColor = { default={black}, over={black} },
+    width=60, height=60,
+    font = "dogfont.ttf",
+    fontSize = 28,
+    onRelease = captureScreen
+  }
+  cameraBtn.x = display.actualContentWidth - (cameraBtn.width*0.5)
+  cameraBtn.y = 70
 
 moneycounter = widget.newButton{
     defaultFile="pictures/coin.png",
@@ -101,11 +120,12 @@ moneycounter = widget.newButton{
     onRelease = onCounterRelease
   }
   moneycounter.x = display.actualContentWidth - (moneycounter.width*0.5)
-  moneycounter.y = 10
+  moneycounter.y =10
   
 local backBtn = functions.createButtonBack(onBackBtnRelease)
 
 sceneGroup:insert( background )
+sceneGroup:insert( cameraBtn )
 sceneGroup:insert( moneycounter )
 sceneGroup:insert( backBtn )
 if animal then
@@ -116,45 +136,45 @@ end
 end
 
 function scene:show( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-	
-	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
-	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		-- 
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
-	end	
+  local sceneGroup = self.view
+  local phase = event.phase
+  
+  if phase == "will" then
+    -- Called when the scene is still off screen and is about to move on screen
+  elseif phase == "did" then
+    -- Called when the scene is now on screen
+    -- 
+    -- INSERT code here to make the scene come alive
+    -- e.g. start timers, begin animation, play audio, etc.
+  end 
 end
 
 function scene:hide( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-	
-	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
-	elseif phase == "did" then
-		-- Called when the scene is now off screen
-	end	
+  local sceneGroup = self.view
+  local phase = event.phase
+  
+  if event.phase == "will" then
+    -- Called when the scene is on screen and is about to move off screen
+    --
+    -- INSERT code here to pause the scene
+    -- e.g. stop timers, stop animation, unload sounds, etc.)
+  elseif phase == "did" then
+    -- Called when the scene is now off screen
+  end 
 end
 
 function scene:destroy( event )
-	local sceneGroup = self.view
+  local sceneGroup = self.view
 
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	-- 
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
-	
-	if playBtn then
-		playBtn:removeSelf()	-- widgets must be manually removed
-		playBtn = nil
-	end
+  -- Called prior to the removal of scene's "view" (sceneGroup)
+  -- 
+  -- INSERT code here to cleanup the scene
+  -- e.g. remove display objects, remove touch listeners, save state, etc.
+  
+  if playBtn then
+    playBtn:removeSelf()  -- widgets must be manually removed
+    playBtn = nil
+  end
 end
 
 ---------------------------------------------------------------------------------

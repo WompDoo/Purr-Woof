@@ -17,7 +17,7 @@ end
 
 local function createButtonBack(functionname)
   local button = widget.newButton{
-    label="☰",
+    defaultFile = "pictures/back.png",
     labelColor = { default={black}, over={black} },
     width=60, height=60,
     fontSize = 30,
