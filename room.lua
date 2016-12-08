@@ -27,7 +27,8 @@ local function onButtonTouch( event )
 end
 
 local function onCounterRelease()
-  composer.gotoScene( "shop", "fade", 500)
+  composer.gotoScene( "shop")
+  composer.removeScene("room")
   return true -- indicates successful touch
 end
 
@@ -56,6 +57,10 @@ if myData.chosenAnimal then
   animal.y = display.actualContentHeight - (animal.height*0.5)
   animal:scale(0.5, 0.5)
   animal:addEventListener("touch", onButtonTouch)
+end
+
+if not myData.availableMoney then 
+  myData.availableMoney = 0
 end
 
 moneycounter = widget.newButton{

@@ -56,6 +56,9 @@ local function onItemBtnRelease(item)
           if myData.availableMoney >= item.price then 
             myData.availableMoney = myData.availableMoney - item.price
             moneycounter:setLabel(myData.availableMoney)
+            if not myData.purchasedItems then 
+              myData.purchasedItems = {}
+            end
             table.insert(myData.purchasedItems, item)
           else
             native.showAlert( "Nope!", "You don't have enough money!", { "Whoops!" })
@@ -179,6 +182,10 @@ function scene:create( event )
 	local background = functions.loadBackground()
 	local titleLogo = functions.loadLogo(5)
 
+  if not myData.availableMoney then 
+    myData.availableMoney = 0
+  end
+  
   moneycounter = widget.newButton{
     defaultFile="pictures/coin.png",
     label=myData.availableMoney,

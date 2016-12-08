@@ -90,6 +90,9 @@ if myData.chosenAnimal then
   animal:addEventListener("touch", onButtonTouch)
 end
 
+if not myData.availableMoney then 
+  myData.availableMoney = 0
+end
 
 moneycounter = widget.newButton{
     defaultFile="pictures/coin.png",
